@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SDu-uJ-zYm">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -17,10 +17,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="lZc-z7-f2e" kind="relationship" relationship="viewControllers" id="NhX-hP-xga"/>
-                        <segue destination="mpf-Uc-m0g" kind="relationship" relationship="viewControllers" id="P7P-Cg-LoL"/>
-                        <segue destination="F2c-39-0p1" kind="relationship" relationship="viewControllers" id="Abf-m0-XkC"/>
-                        <segue destination="6so-fM-RYt" kind="relationship" relationship="viewControllers" id="TyN-1u-SZm"/>
+                        <segue destination="6so-fM-RYt" kind="relationship" relationship="viewControllers" id="cQJ-ud-TGB"/>
+                        <segue destination="lZc-z7-f2e" kind="relationship" relationship="viewControllers" id="VZZ-Ve-jQp"/>
+                        <segue destination="mpf-Uc-m0g" kind="relationship" relationship="viewControllers" id="x9h-gC-tDs"/>
+                        <segue destination="F2c-39-0p1" kind="relationship" relationship="viewControllers" id="WY3-kk-IJn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7U6-J8-yaJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -34,7 +34,7 @@
                 <navigationController id="mpf-Uc-m0g" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="EMv-3R-Hod"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="t2l-zB-a71">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -51,7 +51,7 @@
                 <navigationController id="lZc-z7-f2e" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="zVK-H7-sCP"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ass-so-QSV">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -68,7 +68,7 @@
                 <navigationController id="F2c-39-0p1" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="x6e-LS-ove"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0hk-uA-PMK">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -85,7 +85,7 @@
                 <navigationController id="6so-fM-RYt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="V0t-jL-ZFE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9I8-kS-uoi">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -100,7 +100,7 @@
             <objects>
                 <viewController id="fo8-Zp-I4v" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U2G-Tb-x4R">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="wLK-ri-jPY"/>
@@ -116,8 +116,15 @@
             <objects>
                 <viewController id="aMF-5P-H2e" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6QY-rL-1X8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFy-ge-LWs">
+                                <rect key="frame" x="0.0" y="88" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="c02-kh-Qht"/>
                     </view>
@@ -132,7 +139,7 @@
             <objects>
                 <viewController id="WJ8-af-s63" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Ia-BO-CJA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="RJg-Sl-ESZ"/>
@@ -148,7 +155,7 @@
             <objects>
                 <viewController id="YhJ-RG-Gm2" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oi7-29-akD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="mQc-Rg-grw"/>

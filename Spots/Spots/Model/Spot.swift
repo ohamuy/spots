@@ -10,14 +10,14 @@ import Foundation
 import MapKit
 
 class Spot: NSObject, MKAnnotation {
-    let title: String?
+    let label: String?
     let locationName: String
     let category: Int
 //    let network: Network?
     let coordinate: CLLocationCoordinate2D
     
-    init(title:String, locationName:String, category:Int, coordinate: CLLocationCoordinate2D) {
-        self.title = title
+    init(label:String, locationName:String, category:Int, coordinate: CLLocationCoordinate2D) {
+        self.label = label
         self.locationName = locationName
         self.category = category
         self.coordinate = coordinate

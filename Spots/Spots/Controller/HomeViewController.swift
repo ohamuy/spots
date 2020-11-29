@@ -47,8 +47,8 @@ class HomeViewController: UIViewController {
             let lat = createPinAlert.textFields?[3].text
             let long = createPinAlert.textFields?[4].text
             
-            let newSpotPin = Spot(label: label, locationName: locationName, category: genre, coordinate: CLLocationCoordinate2DMake(41.890158, 12.492185))
-            mapView.addAnnotation(newSpotPin)
+//            let newSpotPin = Spot(label: label, locationName: locationName, category: genre, coordinate: CLLocationCoordinate2DMake(41.890158, 12.492185))
+//            mapView.addAnnotation(newSpotPin)
         }
         let dismiss = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         

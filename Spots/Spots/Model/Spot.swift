@@ -23,7 +23,7 @@ class Spot: NSObject, MKAnnotation {
         self.coordinate = coordinate
     }
     
-    var subtitle: String? {
-        return locationName + " ("+category+")"
-    }
+//    var subtitle: String? {
+//        return locationName + " ("+category+")"
+//    }
 }

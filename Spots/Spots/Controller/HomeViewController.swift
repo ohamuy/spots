@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class HomeViewController: UIViewController {
 
@@ -14,14 +15,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+    @IBOutlet var mapView: MKMapView!
+   
     
+    @IBAction func pinButtonTapped(_ sender: Any) {
+        let newSpotPin = Spot(title: "TestString", locationName: "TestString", category: WORK, coordinate: CLLocationCoordinate2DMake(41.890158, 12.492185))
+        mapView.addAnnotation(newSpotPin)
+    }
     
 // Code for logout
  // Site for logout and login structure of changing view controllers   https://fluffy.es/how-to-transition-from-login-screen-to-tab-bar-controller/

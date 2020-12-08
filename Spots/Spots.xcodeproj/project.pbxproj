@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		133860FE257F7E8700D11441 /* SavedSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133860FD257F7E8700D11441 /* SavedSpotsViewController.swift */; };
+		13386100257F7E9900D11441 /* SpotInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133860FF257F7E9900D11441 /* SpotInfoViewController.swift */; };
 		8824DC032571A39E003D44BB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC022571A39E003D44BB /* SignUpViewController.swift */; };
 		8824DC052571A3B4003D44BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC042571A3B4003D44BB /* LoginViewController.swift */; };
 		8824DC072571A3EC003D44BB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC062571A3EC003D44BB /* HomeViewController.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		133860FD257F7E8700D11441 /* SavedSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotsViewController.swift; sourceTree = "<group>"; };
+		133860FF257F7E9900D11441 /* SpotInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotInfoViewController.swift; sourceTree = "<group>"; };
 		58895EEF1858D5F81015B4FB /* Pods_Spots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8824DC022571A39E003D44BB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8824DC042571A3B4003D44BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 				88A8F99325744EAB00099966 /* PasswordViewController.swift */,
 				88C040BC25732B33007DD89E /* TabBarController.swift */,
 				88A8F991257439DA00099966 /* ProfileViewController.swift */,
+				133860FD257F7E8700D11441 /* SavedSpotsViewController.swift */,
+				133860FF257F7E9900D11441 /* SpotInfoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -268,6 +274,8 @@
 				8824DC052571A3B4003D44BB /* LoginViewController.swift in Sources */,
 				88A8F99425744EAB00099966 /* PasswordViewController.swift in Sources */,
 				BD81440A2574074C00628046 /* Constants.swift in Sources */,
+				133860FE257F7E8700D11441 /* SavedSpotsViewController.swift in Sources */,
+				13386100257F7E9900D11441 /* SpotInfoViewController.swift in Sources */,
 				889C34A52572E78A000183E5 /* LoginUtilities.swift in Sources */,
 				88A8F992257439DA00099966 /* ProfileViewController.swift in Sources */,
 				88B4337D2561C61B004CC97F /* SceneDelegate.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextField: UITextField!
     
@@ -23,6 +23,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         setDefault()
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
     }
     
     //Style default buttons and error label
@@ -45,6 +47,11 @@ class LoginViewController: UIViewController {
     func showError(_ message: String) {
         errorLabel.text = message
         errorLabel.alpha = 1
+    }
+    
+    func textFieldShouldReturn(_ textfield: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     @IBAction func loginTapped(_ sender: Any) {

@@ -13,7 +13,7 @@ import Firebase
 //Learned how to create user authentication here:
 //https://www.youtube.com/watch?v=1HN7usMROt8
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var firstNameTextField: UITextField!
     
@@ -31,7 +31,6 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         setDefault()
-        
     }
     
     //Style buttons and show error label default values
@@ -44,6 +43,11 @@ class SignUpViewController: UIViewController {
         LoginUtilities.styleTextField(lastNameTextField)
         LoginUtilities.styleTextField(emailTextField)
         LoginUtilities.styleTextField(passwordTextField)
+        
+        self.firstNameTextField.delegate = self
+        self.lastNameTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
     }
     
     //Clean Inputs
@@ -78,6 +82,11 @@ class SignUpViewController: UIViewController {
         errorLabel.text = message
         errorLabel.alpha = 1
     }
+    
+    func textFieldShouldReturn(_ textfield: UITextField) -> Bool {
+           self.view.endEditing(true)
+           return false
+       }
     
     @IBAction func registerTapped(_ sender: Any) {
         //Check if password is valid

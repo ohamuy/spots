@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import MapKit
 
-class SpotInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SpotInfoViewController: UIViewController, MapKit{
     
     var clickedSpot: Spot!
     
-    
+    override func viewDidLoad() {
+        <#code#>
+    }
 }

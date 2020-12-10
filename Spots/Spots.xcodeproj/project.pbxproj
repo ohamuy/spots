@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		133860FE257F7E8700D11441 /* SavedSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133860FD257F7E8700D11441 /* SavedSpotsViewController.swift */; };
 		13386100257F7E9900D11441 /* SpotInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133860FF257F7E9900D11441 /* SpotInfoViewController.swift */; };
+		13386102257F82C200D11441 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 13386101257F82C200D11441 /* Podfile */; };
 		8824DC032571A39E003D44BB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC022571A39E003D44BB /* SignUpViewController.swift */; };
 		8824DC052571A3B4003D44BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC042571A3B4003D44BB /* LoginViewController.swift */; };
 		8824DC072571A3EC003D44BB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC062571A3EC003D44BB /* HomeViewController.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		133860FD257F7E8700D11441 /* SavedSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotsViewController.swift; sourceTree = "<group>"; };
 		133860FF257F7E9900D11441 /* SpotInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotInfoViewController.swift; sourceTree = "<group>"; };
+		13386101257F82C200D11441 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		58895EEF1858D5F81015B4FB /* Pods_Spots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8824DC022571A39E003D44BB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8824DC042571A3B4003D44BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 		88B4336E2561C61A004CC97F = {
 			isa = PBXGroup;
 			children = (
+				13386101257F82C200D11441 /* Podfile */,
 				88B433792561C61B004CC97F /* Spots */,
 				88B433782561C61B004CC97F /* Products */,
 				363738A755A626CEA13950C7 /* Pods */,
@@ -211,6 +214,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13386102257F82C200D11441 /* Podfile in Resources */,
 				88B433872561C61B004CC97F /* LaunchScreen.storyboard in Resources */,
 				88F21AB0256CB94D007F3613 /* GoogleService-Info.plist in Resources */,
 				88B433842561C61B004CC97F /* Assets.xcassets in Resources */,

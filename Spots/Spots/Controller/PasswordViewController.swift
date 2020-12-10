@@ -29,7 +29,7 @@ class PasswordViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        LoginUtilities.styleButton(saveButton)
+        Utilities.styleButton(saveButton)
     }
     
 

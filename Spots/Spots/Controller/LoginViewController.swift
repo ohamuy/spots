@@ -30,9 +30,9 @@ class LoginViewController: UIViewController {
         errorLabel.alpha = 0
         
         //style button and fields here
-        LoginUtilities.styleButton(loginButton)
-        LoginUtilities.styleTextField(emailTextField)
-        LoginUtilities.styleTextField(passwordTextField)
+        Utilities.styleButton(loginButton)
+        Utilities.styleTextField(emailTextField)
+        Utilities.styleTextField(passwordTextField)
     }
     
     //Clean Inputs

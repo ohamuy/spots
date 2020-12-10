@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SavedSpotsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class SavedSpotsViewController: UIViewController {
     
     //values that will be imported from elsewhere
     var numCategories:Int!
@@ -25,9 +25,22 @@ class SavedSpotsViewController: UIViewController, UITableViewDelegate, UITableVi
     //the UITableView
     @IBOutlet var spotsTable: UITableView!
     
+
     //counts the number of keys to return how many sections there should be
     func numberOfSections(in tableView: UITableView) -> Int {
-        let numCat = keys.count
+        return 0
+    }
+        //let numCat = keys.count
+        
+    //to figure out how many sections there are
+    func countCategories (list: [Spot]) -> Int {
+        var numCat = 1
+        for i in 1...list.count-1 {
+            let firstCat = list[i].category
+            if list[i+1].category != firstCat {
+                numCat += 1 
+            }
+        }
         return numCat
     }
     
@@ -58,11 +71,9 @@ class SavedSpotsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //when an item is selected, a new view controller that shows details about that spot will be pushed forward
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let spotInfoVC = storyboard!.instantiateViewController(identifier: "spotInfo") as SpotInfoViewController
-        let spotArray = spotsList[keys[indexPath.section]]
-        spotInfoVC.clickedSpot = spotArray![indexPath.row]
-        navigationController?.pushViewController(spotInfoVC, animated: true)
+        //let spotInfoVC = storyboard!.instantiateViewController(identifier: "spotInfo") as SpotInfoViewController
+        //        detailedVC.image = theImageCache[indexPath.row]
+        //spotInfoVC.clickedSpot = spotsList[indexPath.row]
+        //navigationController?.pushViewController(detailedVC, animated: true)
     }
-    
-    
 }

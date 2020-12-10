@@ -13,7 +13,7 @@ import Firebase
 //Learned how to create user authentication here:
 //https://www.youtube.com/watch?v=1HN7usMROt8
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var firstNameTextField: UITextField!
     
@@ -39,11 +39,16 @@ class SignUpViewController: UIViewController {
         errorLabel.alpha = 0
         
         //style button and fields
-        LoginUtilities.styleButton(registerButton)
-        LoginUtilities.styleTextField(firstNameTextField)
-        LoginUtilities.styleTextField(lastNameTextField)
-        LoginUtilities.styleTextField(emailTextField)
-        LoginUtilities.styleTextField(passwordTextField)
+        self.firstNameTextField.delegate = self
+        self.lastNameTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        
+        Utilities.styleButton(registerButton)
+        Utilities.styleTextField(firstNameTextField)
+        Utilities.styleTextField(lastNameTextField)
+        Utilities.styleTextField(emailTextField)
+        Utilities.styleTextField(passwordTextField)
     }
     
     //Clean Inputs
@@ -66,7 +71,7 @@ class SignUpViewController: UIViewController {
         
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if LoginUtilities.isPasswordValid(password) == false {
+        if Utilities.isPasswordValid(password) == false {
             return "Please enter a valid password containing at least 8 characters, one special character, and one number"
         }
         
@@ -111,7 +116,7 @@ class SignUpViewController: UIViewController {
                     }
                     
                     //Login to home page
-                    LoginUtilities.goToMain()
+                    Utilities.goToMain()
                 }
             }
             

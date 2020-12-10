@@ -9,11 +9,12 @@
 import UIKit
 import MapKit
 
-class SpotInfoViewController: UIViewController, MapKit{
+class SpotInfoViewController: UIViewController{
     
     var clickedSpot: Spot!
     
     override func viewDidLoad() {
-        <#code#>
+        
     }
 }
+

@@ -14,6 +14,7 @@ class Spot: NSObject, MKAnnotation {
     let locationName: String
     let category: Int
 //    let network: Network?
+
     let coordinate: CLLocationCoordinate2D
     
     init(label:String, locationName:String, category:Int, coordinate: CLLocationCoordinate2D) {

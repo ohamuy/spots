@@ -15,7 +15,7 @@ import UIKit
 //TAN: #eae2c5 / 234, 226, 197
 
 
-class LoginUtilities {
+class Utilities {
     
     static func styleTextField(_ textfield: UITextField) {
         //Create Underline
@@ -27,6 +27,29 @@ class LoginUtilities {
         textfield.borderStyle = .none
         textfield.textColor = UIColor.init(red: 37/255, green: 139/255, blue: 144/255, alpha: 1)
         textfield.layer.addSublayer(underline)
+    }
+    
+    static func styleTextFieldAppContent(_ textfield: UITextField) {
+        //Create Underline
+        let underline = CALayer()
+        
+        underline.frame = CGRect(x: 0, y:textfield.frame.height - 2, width: textfield.frame.width, height: 2)
+        underline.backgroundColor = UIColor.init(red: 234/255, green: 226/255, blue: 197/255, alpha: 1).cgColor
+        
+        textfield.borderStyle = .none
+        textfield.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+        textfield.layer.addSublayer(underline)
+    }
+    
+    static func styleLabel(_ label: UILabel) {
+        //Create Underline
+        let underline = CALayer()
+        
+        underline.frame = CGRect(x: 0, y:label.frame.height - 2, width: label.frame.width, height: 2)
+        underline.backgroundColor = UIColor.init(red: 234/255, green: 226/255, blue: 197/255, alpha: 1).cgColor
+        
+        label.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+        label.layer.addSublayer(underline)
     }
     
     static func styleButton(_ button:UIButton) {

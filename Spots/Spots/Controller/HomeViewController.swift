@@ -41,11 +41,11 @@ class HomeViewController: UIViewController {
         
         // done action
         let create = UIAlertAction(title: "Create", style: .default) { (_) in
-            let label = createPinAlert.textFields?[0].text //?? "Untilted"
-            let locationName = createPinAlert.textFields?[1].text
-            let genre = createPinAlert.textFields?[2].text
-            let lat = createPinAlert.textFields?[3].text
-            let long = createPinAlert.textFields?[4].text
+//            let label = createPinAlert.textFields?[0].text //?? "Untilted"
+//            let locationName = createPinAlert.textFields?[1].text
+//            let genre = createPinAlert.textFields?[2].text
+//            let lat = createPinAlert.textFields?[3].text
+//            let long = createPinAlert.textFields?[4].text
             
 //            let newSpotPin = Spot(label: label, locationName: locationName, category: genre, coordinate: CLLocationCoordinate2DMake(41.890158, 12.492185))
 //            mapView.addAnnotation(newSpotPin)

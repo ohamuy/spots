@@ -13,7 +13,8 @@
 		8824DC032571A39E003D44BB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC022571A39E003D44BB /* SignUpViewController.swift */; };
 		8824DC052571A3B4003D44BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC042571A3B4003D44BB /* LoginViewController.swift */; };
 		8824DC072571A3EC003D44BB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC062571A3EC003D44BB /* HomeViewController.swift */; };
-		889C34A52572E78A000183E5 /* LoginUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C34A42572E78A000183E5 /* LoginUtilities.swift */; };
+		889C34A52572E78A000183E5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C34A42572E78A000183E5 /* Utilities.swift */; };
+		88A2931C25819BA300D78E91 /* CustomPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2931B25819BA300D78E91 /* CustomPinViewController.swift */; };
 		88A8F992257439DA00099966 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8F991257439DA00099966 /* ProfileViewController.swift */; };
 		88A8F99425744EAB00099966 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8F99325744EAB00099966 /* PasswordViewController.swift */; };
 		88B4337B2561C61B004CC97F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B4337A2561C61B004CC97F /* AppDelegate.swift */; };
@@ -37,7 +38,8 @@
 		8824DC022571A39E003D44BB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8824DC042571A3B4003D44BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8824DC062571A3EC003D44BB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		889C34A42572E78A000183E5 /* LoginUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUtilities.swift; sourceTree = "<group>"; };
+		889C34A42572E78A000183E5 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		88A2931B25819BA300D78E91 /* CustomPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPinViewController.swift; sourceTree = "<group>"; };
 		88A8F991257439DA00099966 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		88A8F99325744EAB00099966 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		88B433772561C61B004CC97F /* Spots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spots.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 				88A8F991257439DA00099966 /* ProfileViewController.swift */,
 				133860FD257F7E8700D11441 /* SavedSpotsViewController.swift */,
 				133860FF257F7E9900D11441 /* SpotInfoViewController.swift */,
+				88A2931B25819BA300D78E91 /* CustomPinViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -139,7 +142,7 @@
 		88B433902561C888004CC97F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				889C34A42572E78A000183E5 /* LoginUtilities.swift */,
+				889C34A42572E78A000183E5 /* Utilities.swift */,
 				BD8144062574059E00628046 /* Spot.swift */,
 				BD8144092574074C00628046 /* Constants.swift */,
 			);
@@ -278,9 +281,10 @@
 				8824DC052571A3B4003D44BB /* LoginViewController.swift in Sources */,
 				88A8F99425744EAB00099966 /* PasswordViewController.swift in Sources */,
 				BD81440A2574074C00628046 /* Constants.swift in Sources */,
+				88A2931C25819BA300D78E91 /* CustomPinViewController.swift in Sources */,
 				133860FE257F7E8700D11441 /* SavedSpotsViewController.swift in Sources */,
 				13386100257F7E9900D11441 /* SpotInfoViewController.swift in Sources */,
-				889C34A52572E78A000183E5 /* LoginUtilities.swift in Sources */,
+				889C34A52572E78A000183E5 /* Utilities.swift in Sources */,
 				88A8F992257439DA00099966 /* ProfileViewController.swift in Sources */,
 				88B4337D2561C61B004CC97F /* SceneDelegate.swift in Sources */,
 				BD8144072574059E00628046 /* Spot.swift in Sources */,

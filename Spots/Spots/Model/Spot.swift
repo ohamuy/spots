@@ -12,11 +12,11 @@ import MapKit
 class Spot: NSObject, MKAnnotation {
     let label: String?
     let locationName: String
-    let category: Int
+    let category: String
 //    let network: Network?
     let coordinate: CLLocationCoordinate2D
     
-    init(label:String, locationName:String, category:Int, coordinate: CLLocationCoordinate2D) {
+    init(label:String, locationName:String, category:String, coordinate: CLLocationCoordinate2D) {
         self.label = label
         self.locationName = locationName
         self.category = category

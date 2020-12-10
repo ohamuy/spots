@@ -440,16 +440,21 @@
                                 <rect key="frame" x="0.0" y="52" width="375" height="677"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAq-zn-h1H">
-                                <rect key="frame" x="259" y="668" width="82" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="New Pin"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAq-zn-h1H">
+                                <rect key="frame" x="207" y="679" width="152" height="31"/>
+                                <state key="normal" title="📍Current Location"/>
                                 <connections>
                                     <action selector="pinButtonTapped:" destination="AsV-xO-wNf" eventType="touchUpInside" id="4YF-Nj-zuT"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="uAq-zn-h1H" firstAttribute="trailing" secondItem="loa-mf-L6F" secondAttribute="trailingMargin" id="Moh-wc-Tgq"/>
+                            <constraint firstItem="uAq-zn-h1H" firstAttribute="leading" secondItem="EyX-JH-MlL" secondAttribute="leading" constant="207" id="VTP-vS-aj0"/>
+                            <constraint firstItem="EyX-JH-MlL" firstAttribute="bottom" secondItem="uAq-zn-h1H" secondAttribute="bottom" constant="19" id="qpe-9U-Qyn"/>
+                            <constraint firstItem="uAq-zn-h1H" firstAttribute="top" secondItem="EyX-JH-MlL" secondAttribute="top" constant="635" id="yy6-3u-ljU"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="EyX-JH-MlL"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="fqL-2M-Cgo"/>
@@ -583,10 +588,10 @@
             </objects>
             <point key="canvasLocation" x="-762" y="838"/>
         </scene>
-        <!--View Controller-->
+        <!--Spot Info View Controller-->
         <scene sceneID="Cj8-7g-uao">
             <objects>
-                <viewController storyboardIdentifier="spotInfo" id="IEf-jT-YUu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="spotInfo" id="IEf-jT-YUu" customClass="SpotInfoViewController" customModule="Spots" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j5c-EN-H2v">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -625,6 +630,9 @@
                         <viewLayoutGuide key="safeArea" id="1Wf-Io-Njp"/>
                     </view>
                     <navigationItem key="navigationItem" id="2Cw-aE-J9Y"/>
+                    <connections>
+                        <outlet property="mapView" destination="BKQ-Ik-8DE" id="K45-76-d93"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6M-xm-UXA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

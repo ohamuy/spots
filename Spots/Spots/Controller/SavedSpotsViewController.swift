@@ -16,11 +16,20 @@ class SavedSpotsViewController: UIViewController, UITableViewDelegate, UITableVi
     var keys:[String] = []
     
     override func viewDidLoad() {
+        //extracting the keys and making it into an array
         for i in spotsList.keys {
             keys.append(i)
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationReceived), name: Notification.Name("spot created"), object: nil)
+        
     }
     
+    @objc func notificationReceived(_ notification: NSNotification){
+        let theSpot = notification.object as? Spot
+        let category = theSpot!.category
+        print("\(category)")
+    }
     
     //the UITableView
     @IBOutlet var spotsTable: UITableView!

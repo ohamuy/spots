@@ -75,8 +75,24 @@ class Utilities {
     }
     
     // clear user input for firestore record
-    static func parseInputToRecord (record: String) -> String {
-        var clean = record.trimmingCharacters(in: .whitespacesAndNewlines)
-        return clean.lowercased().replacingOccurrences(of: " ", with: "_");
+    static func parseInputToRecord (input: String) -> String {
+        let clean = input.trimmingCharacters(in: .whitespacesAndNewlines)
+        return clean.lowercased().replacingOccurrences(of: " ", with: "_")
+    }
+    
+    // prepare record name for display to user
+    static func parseRecordToDisplayText (record: String) -> String {
+        let components = record.components(separatedBy: "_")
+        var rejoin = [String]();
+        for c in components {
+            print(c)
+            if !connectors.contains(c) {
+                rejoin.append(c.prefix(1).uppercased() + c.lowercased().dropFirst())
+            }
+            else {
+                rejoin.append(c)
+            }
+        }
+        return rejoin.joined(separator: " ")
     }
 }

@@ -14,3 +14,16 @@ let WORK = 1
 let ENTERTAINMENT = 2
 let NATURE = 3
 
+// connectors
+let connectors = [
+    "of",
+    "the",
+    "and",
+    "by",
+    "at",
+    "on",
+    "in",
+    "for",
+    "with"
+]
+

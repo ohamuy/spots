@@ -139,9 +139,11 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         var docid = ""
         
         var genreRecord = genreInputField.text ?? "null_genre";
-        genreRecord = Utilities.parseInputToRecord(record:  genreRecord);
-        print(genreRecord);
+        genreRecord = Utilities.parseInputToRecord(input:  genreRecord);
+        
         // *** var genreRecord ready for storage in DB
+        print("Record version: \(genreRecord)");
+        print("Dislay version: \(Utilities.parseRecordToDisplayText(record: genreRecord))")
         
         //FIX THIS LATER
         db.collection("spots").whereField("uid", isEqualTo: uid!)
@@ -178,5 +180,10 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
 //            }
 //        })
         
+//        clearPin()
     }
+    
+//    func clearPin() {
+//
+//    }
 }

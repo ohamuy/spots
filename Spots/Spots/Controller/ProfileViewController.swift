@@ -13,11 +13,14 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func logoutTapped(_ sender: Any) {
+        //logout user from auth()
+        do {try Auth.auth().signOut() }
+        catch {print("no user logged in")}
+
+        UserDefaults.standard.removeObject(forKey: "uid")
         UserDefaults.standard.removeObject(forKey: "userEmail")
            
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -25,15 +28,5 @@ class ProfileViewController: UIViewController {
        
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

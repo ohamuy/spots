@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import FirebaseAuth
+import MapKit
 
-class CustomPinViewController: UIViewController {
+class CustomPinViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var pageTitle: UILabel!
     @IBOutlet weak var locationTitle: UILabel!
@@ -25,9 +25,18 @@ class CustomPinViewController: UIViewController {
     @IBOutlet weak var subtitlePreview: UILabel!
     @IBOutlet weak var imagePreview: UIImageView!
     
+    @IBOutlet weak var locationMapView: MKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         setDefault()
+        locationMapView.delegate = self
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.addPin(_:)))
+        longPressRecognizer.minimumPressDuration = 0.5
+        locationMapView.addGestureRecognizer(longPressRecognizer)
+        
+        locationMapView.mapType = MKMapType.standard
     }
     
     func setDefault () {
@@ -41,21 +50,32 @@ class CustomPinViewController: UIViewController {
         Utilities.styleTextFieldAppContent(subtitleTextField)
     }
 
-    @IBAction func titleTextFieldChanged(_ sender: UITextField) {
-        titlePreview.text = sender.text
-        let user = Auth.auth().currentUser
-        if user != nil {
-            print(user!.uid)
-        }
+    //ability to add pin to mapkit
+    var lat : String = "13.1631"
+    var lon : String = "72.5450"
+    
+    //learned here: https://www.youtube.com/watch?v=Kfw9XCO6VGY
+    @objc func addPin(_ longPress: UILongPressGestureRecognizer) {
+        let location = longPress.location(in: locationMapView)
+        let coordinate = locationMapView.convert(location, toCoordinateFrom: locationMapView)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = "latitude: " + String(format: "%0.02f", annotation.coordinate.latitude) + "longitude: " + String(format: "%0.02f", annotation.coordinate.latitude)
+        locationMapView.addAnnotation(annotation)
     }
     
+    //change preview as text field is changed
+    @IBAction func titleTextFieldChanged(_ sender: UITextField) {
+        titlePreview.text = sender.text
+    }
+    
+    //change preview as text field is changed
     @IBAction func subtitleTextFieldChanged(_ sender: UITextField) {
         subtitlePreview.text = sender.text
     }
     
-    
-    
-    
+    //add image to preview when image is added
     //https://www.youtube.com/watch?v=yggOGEzueFk
     @IBAction func addImageTapped(_ sender: Any) {
         let vc = UIImagePickerController()

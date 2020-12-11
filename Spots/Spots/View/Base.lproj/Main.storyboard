@@ -342,6 +342,7 @@
                         <outlet property="finishButton" destination="eXT-kd-1Qo" id="E6L-FQ-XUP"/>
                         <outlet property="genreInputField" destination="RQY-37-4vc" id="nRG-Wo-asa"/>
                         <outlet property="imagePreview" destination="oK3-VV-OMV" id="sxZ-aj-bwn"/>
+                        <outlet property="locationMapView" destination="f4d-Eo-b28" id="C78-oE-XwB"/>
                         <outlet property="locationTitle" destination="whD-pd-taP" id="0CZ-Yd-Pkt"/>
                         <outlet property="pageTitle" destination="QJG-H3-wtS" id="dtm-U4-Sly"/>
                         <outlet property="previewTitle" destination="3yI-Ii-hkl" id="4W3-nd-Ynl"/>

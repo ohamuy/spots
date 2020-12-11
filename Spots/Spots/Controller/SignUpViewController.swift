@@ -116,6 +116,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     }
                     
                     //Login to home page
+                    let defaults = UserDefaults.standard
+                    defaults.set(Auth.auth().currentUser?.uid, forKey: "uid")
                     Utilities.goToMain()
                 }
             }

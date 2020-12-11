@@ -60,7 +60,7 @@ class LoginViewController: UIViewController {
                 //Store Username in UserDefualts
                 //https://www.hackingwithswift.com/example-code/system/how-to-save-user-settings-using-userdefaults
                 let defaults = UserDefaults.standard
-                defaults.set(inputs[0], forKey: "userEmail")
+                defaults.set(Auth.auth().currentUser?.uid, forKey: "uid")
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")

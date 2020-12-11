@@ -138,6 +138,11 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         let uid = Auth.auth().currentUser?.uid
         var docid = ""
         
+        var genreRecord = genreInputField.text ?? "null_genre";
+        genreRecord = Utilities.parseInputToRecord(record:  genreRecord);
+        print(genreRecord);
+        // *** var genreRecord ready for storage in DB
+        
         //FIX THIS LATER
         db.collection("spots").whereField("uid", isEqualTo: uid!)
             .getDocuments() { (querySnapshot, err) in

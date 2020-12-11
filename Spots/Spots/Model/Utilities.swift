@@ -73,4 +73,10 @@ class Utilities {
         // then call the change root view controller function to change to main tab bar
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
     }
+    
+    // clear user input for firestore record
+    static func parseInputToRecord (record: String) -> String {
+        var clean = record.trimmingCharacters(in: .whitespacesAndNewlines)
+        return clean.lowercased().replacingOccurrences(of: " ", with: "_");
+    }
 }

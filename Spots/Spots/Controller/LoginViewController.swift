@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextField: UITextField!
     
@@ -33,6 +33,8 @@ class LoginViewController: UIViewController {
         Utilities.styleButton(loginButton)
         Utilities.styleTextField(emailTextField)
         Utilities.styleTextField(passwordTextField)
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self 
     }
     
     //Clean Inputs
@@ -70,5 +72,9 @@ class LoginViewController: UIViewController {
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
             }
         }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

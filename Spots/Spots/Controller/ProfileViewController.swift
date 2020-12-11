@@ -9,10 +9,26 @@
 import UIKit
 import FirebaseAuth
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate{
+    
+    var imgPicker = UIImagePickerController()
 
+    var currentImage: UIImage? = nil
+    
+    @IBOutlet weak var profilePic: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        imgPicker.delegate = self
+    }
+    
+    @IBAction func changePic(_ sender: Any) {
+        imgPicker.sourceType = .photoLibrary
+
+        imgPicker.allowsEditing = true
+
+        present(imgPicker, animated: true, completion: nil)
     }
     
     @IBAction func logoutTapped(_ sender: Any) {
@@ -28,5 +44,23 @@ class ProfileViewController: UIViewController {
        
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
     }
+    
+
+      
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+
+            profilePic.image = image
+
+            currentImage = profilePic.image
+
+        }
+
+        dismiss(animated: true, completion: nil)
+
+    }
+    
 
 }

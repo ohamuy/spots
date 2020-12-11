@@ -84,6 +84,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         errorLabel.alpha = 1
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     @IBAction func registerTapped(_ sender: Any) {
         //Check if password is valid
         let errorMessage = validateFields()

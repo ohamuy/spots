@@ -447,6 +447,9 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="   Change Profile Picture"/>
+                                        <connections>
+                                            <action selector="changePic:" destination="YhJ-RG-Gm2" eventType="touchUpInside" id="Cmk-cl-slz"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iFq-4t-6LO">
                                         <rect key="frame" x="0.0" y="162" width="375" height="80"/>
@@ -500,6 +503,9 @@
                         <viewLayoutGuide key="safeArea" id="mQc-Rg-grw"/>
                     </view>
                     <navigationItem key="navigationItem" title="User and settings" id="8n4-F2-jBH"/>
+                    <connections>
+                        <outlet property="profilePic" destination="7FN-3D-dAc" id="aUi-Ns-QHr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hYC-Ib-ayh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

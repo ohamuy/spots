@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import Firebase
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     
@@ -17,10 +18,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
     
     @IBOutlet weak var profilePic: UIImageView!
     
+    @IBOutlet weak var userName: UILabel!
+    
+    @IBOutlet weak var savedSpots: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imgPicker.delegate = self
+        setName()
     }
     
     @IBAction func changePic(_ sender: Any) {
@@ -45,7 +51,35 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
     }
     
-
+    func setName() {
+        //userName.text = Auth.auth().currentUser?.displayName
+        let db = Firestore.firestore()
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        db.collection("users").whereField("uid", isEqualTo: uid)
+        .getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+                //print("\(document.documentID) => \(document.data())")
+                let name: String = document.get("firstname") as! String
+                let last: String = document.get("lastname") as! String
+                let fullname = name + " " + last
+                self.userName.text = fullname
+                
+            }
+        }
+        }
+//        let userSavedSpots: SavedSpotsViewController = SavedSpotsViewController()
+//        let numSaved = userSavedSpots.spotsList.count
+//        if numSaved != nil {
+//           self.savedSpots.text = "# saved spots: \(numSaved)"
+//       }
+//    else {
+//            self.savedSpots.text = "# saved spots: 0"
+//        }
+        self.savedSpots.text = "# Saved Spots: 0"
+    }
       
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -61,6 +95,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
         dismiss(animated: true, completion: nil)
 
     }
+    
+    
     
 
 }

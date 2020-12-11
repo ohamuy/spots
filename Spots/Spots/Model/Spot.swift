@@ -13,7 +13,7 @@ class Spot: NSObject, MKAnnotation {
     let label: String?
     let locationName: String
     let category: Int
-//    let network: Network?
+//  let network: Network?
 
     let coordinate: CLLocationCoordinate2D
     

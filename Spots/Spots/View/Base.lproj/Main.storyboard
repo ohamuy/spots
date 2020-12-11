@@ -258,6 +258,7 @@
                                     <color key="titleColor" red="0.91764705879999997" green="0.8862745098" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
+                                    <action selector="finishTapped:" destination="aMF-5P-H2e" eventType="touchUpInside" id="FLz-H2-W1f"/>
                                     <action selector="registerTapped:" destination="jaa-bi-3Wv" eventType="touchUpInside" id="os8-po-Geu"/>
                                 </connections>
                             </button>

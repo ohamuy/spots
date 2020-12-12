@@ -14,6 +14,10 @@ let WORK = 1
 let ENTERTAINMENT = 2
 let NATURE = 3
 
+// customPin constants
+let CONFIRM = 0
+let RESET = 1
+
 // connectors
 let connectors = [
     "of",

@@ -31,6 +31,7 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     @IBOutlet weak var locationMapView: MKMapView!
     
     var coordinateData: CLLocationCoordinate2D?
+    var currentAnnotation: MKPointAnnotation?
     
     let storage = Storage.storage().reference()
     var imageData: Data?
@@ -42,6 +43,7 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         setDefault()
         
         coordinateData = nil
+        currentAnnotation = nil
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.addPin(_:)))
         longPressRecognizer.minimumPressDuration = 0.5
@@ -94,6 +96,8 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         annotation.coordinate = coordinateData!
         annotation.title = "latitude: " + String(format: "%0.02f", annotation.coordinate.latitude) + "longitude: " + String(format: "%0.02f", annotation.coordinate.latitude)
         locationMapView.addAnnotation(annotation)
+        
+        currentAnnotation = annotation
     }
     
     //change preview as text field is changed
@@ -104,6 +108,19 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     //change preview as text field is changed
     @IBAction func subtitleTextFieldChanged(_ sender: UITextField) {
         subtitlePreview.text = sender.text
+    }
+    
+    @IBAction func resetDataButtonTapped(_ sender: Any) {
+        let confirm = UIAlertController(title: "Confirm Reset", message: "Are you sure you want to clear the pin in-progress?", preferredStyle: .alert)
+        confirm.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Confirm"), style: .default, handler: { _ in
+            NSLog("Pin clear confirmed, reset VC")
+            self.clearPin(mode: RESET)
+        }))
+        confirm.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Confirm"), style: .default, handler: { _ in
+            NSLog("Pin clear aborted")
+            return
+        }))
+        self.present(confirm, animated: true, completion: nil)
     }
     
     //sets image to image preview after selecting it from libary
@@ -193,10 +210,6 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
                 }
         }
         
-        //check if title, genre are filled
-        
-        
-        
         //add image to storage
  
         
@@ -208,16 +221,25 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
 //            }
 //        })
         
-        clearPin()
+        clearPin(mode: CONFIRM)
     }
     
-    func clearPin() {
-        let genre = genreInputField.text ?? "null_genre"
-        let confirm = UIAlertController(title: "Pin Created", message: "\(titleInputField.text!) was successfully added to your network \(Utilities.parseRecordToDisplayText(record: Utilities.parseInputToRecord(input: genre))).", preferredStyle: .alert)
-        confirm.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm"), style: .default, handler: { _ in
-            NSLog("Pin add confirmed, reset VC")
-        }))
-        self.present(confirm, animated: true, completion: nil)
+    func clearPin(mode: Int) {
+        if mode == CONFIRM {
+            let genre = genreInputField.text ?? "null_genre"
+            let confirm = UIAlertController(title: "Pin Created", message: "\(titleInputField.text!) was successfully added to your network \(Utilities.parseRecordToDisplayText(record: Utilities.parseInputToRecord(input: genre))).", preferredStyle: .alert)
+            confirm.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm"), style: .default, handler: { _ in
+                NSLog("Pin add confirmed, reset VC")
+            }))
+            self.present(confirm, animated: true, completion: nil)
+        }
+        else if mode == RESET {
+            print("Pin data reset")
+            // DEVNOTE: do anything else? confirm moved to button handler
+        }
+        else {
+            print("Err: invalid mode on clear of custom pin data!")
+        }
         
         titleInputField.text = ""
         genreInputField.text = ""
@@ -226,5 +248,11 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         imagePreview.image = nil
         titlePreview.text = ""
         subtitlePreview.text = ""
+        
+        coordinateData = nil
+        if currentAnnotation != nil {
+            locationMapView.removeAnnotation(currentAnnotation!)
+            currentAnnotation = nil
+        }
     }
 }

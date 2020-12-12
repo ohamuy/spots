@@ -9,8 +9,22 @@
 import Foundation
 
 // Genre codes
-let FOOD = 0
-let WORK = 1
-let ENTERTAINMENT = 2
-let NATURE = 3
+let NO_GENRE = "null"
+
+// customPin constants
+let CONFIRM = 0
+let RESET = 1
+
+// connectors
+let connectors = [
+    "of",
+    "the",
+    "and",
+    "by",
+    "at",
+    "on",
+    "in",
+    "for",
+    "with"
+]
 

@@ -62,5 +62,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow permissions to import photos to Spot</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Permission needed to show location on map</string>
 </dict>
 </plist>

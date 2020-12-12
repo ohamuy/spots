@@ -30,6 +30,8 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     
     @IBOutlet weak var locationMapView: MKMapView!
     
+    var coordinateData: CLLocationCoordinate2D?
+    
     let storage = Storage.storage().reference()
     var imageData: Data?
     let db = Firestore.firestore()
@@ -38,11 +40,14 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         super.viewDidLoad()
         
         setDefault()
-        locationMapView.delegate = self
+        
+        coordinateData = nil
+        
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.addPin(_:)))
         longPressRecognizer.minimumPressDuration = 0.5
-        locationMapView.addGestureRecognizer(longPressRecognizer)
         
+        locationMapView.delegate = self
+        locationMapView.addGestureRecognizer(longPressRecognizer)
         locationMapView.mapType = MKMapType.standard
         
         storage.child("images/file.png").downloadURL(completion: {url, error in
@@ -83,10 +88,10 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         locationMapView.removeAnnotations(locationMapView.annotations)
         
         let location = longPress.location(in: locationMapView)
-        let coordinate = locationMapView.convert(location, toCoordinateFrom: locationMapView)
+        coordinateData = locationMapView.convert(location, toCoordinateFrom: locationMapView)
         
         let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
+        annotation.coordinate = coordinateData!
         annotation.title = "latitude: " + String(format: "%0.02f", annotation.coordinate.latitude) + "longitude: " + String(format: "%0.02f", annotation.coordinate.latitude)
         locationMapView.addAnnotation(annotation)
     }
@@ -135,10 +140,20 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     //adds spot to firebase
     @IBAction func finishTapped(_ sender: Any) {
         
+        // check if coordinate data exists
+        if coordinateData == nil {
+            let noTitleErrorMsg = UIAlertController(title: "Where was that?", message: "We didn't catch the location of that spot. Press and hold on the map to drop a pin.", preferredStyle: .alert)
+            noTitleErrorMsg.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Go back"), style: .default, handler: { _ in
+                NSLog("Err: no coords on pin save")
+            }))
+            self.present(noTitleErrorMsg, animated: true, completion: nil)
+            return
+        }
+        
         // check if title exists
         let title = titleInputField.text ?? ""
         if title.isEmpty {
-            let noTitleErrorMsg = UIAlertController(title: "Title Required", message: "Spots need a name. Add something to the title field, then try again.", preferredStyle: .alert)
+            let noTitleErrorMsg = UIAlertController(title: "Title Required", message: "Every spot need a name. Add something to the title field, then try again.", preferredStyle: .alert)
             noTitleErrorMsg.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Go back"), style: .default, handler: { _ in
                 NSLog("Err: no title on pin save")
             }))

@@ -13,7 +13,6 @@ class Spot: NSObject, MKAnnotation {
     let label: String?
     let locationName: String
     let category: Int
-//  let network: Network?
 
     let coordinate: CLLocationCoordinate2D
     
@@ -23,8 +22,4 @@ class Spot: NSObject, MKAnnotation {
         self.category = category
         self.coordinate = coordinate
     }
-    
-//    var subtitle: String? {
-//        return locationName + " ("+category+")"
-//    }
 }

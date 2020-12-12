@@ -98,4 +98,22 @@ class Utilities {
         }
         return rejoin.joined(separator: " ")
     }
+    
+    // convert UI color to hexidecimal string
+    // inspired and tweaked from this code https://stackoverflow.com/questions/26341008/how-to-convert-uicolor-to-hex-and-display-in-nslog
+    static func convertColorToHex(color: UIColor?) -> String {
+        if color == nil {
+            return "#000000"
+        }
+        let codeRGB = color!.cgColor.components
+        
+        let colorInHex = String.init(
+            format: "#%02lX%02lX%02lX",
+            floor(Float((codeRGB?[0] ?? 0.0) * 255)),   // red
+            floor(Float((codeRGB?[1] ?? 0.0) * 255)),   // green
+            floor(Float((codeRGB?[2] ?? 0.0) * 255)))   // blue
+        print(colorInHex)
+        return colorInHex
+    }
+    
 }

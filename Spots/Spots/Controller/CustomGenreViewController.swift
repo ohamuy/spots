@@ -12,7 +12,7 @@ import FirebaseAuth
 import Firebase
 
 class CustomGenreViewController: UIViewController {
-
+    
     // Model variables
     var genreColor: UIColor?
     var recordId: String?
@@ -25,16 +25,16 @@ class CustomGenreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
-
+    
     // Event handlers
     @IBAction func colorButtonTapped(_ sender: Any) {
-        let colorPicker = UIColorPickerViewController()
-        colorPicker.delegate = self
-        self.present(colorPicker, animated: true, completion: nil)
+        //        let colorPicker = UIColorPickerViewController()
+        //        colorPicker.delegate = self
+        //        self.present(colorPicker, animated: true, completion: nil)
     }
     
     @IBAction func saveGenreButtonTapped(_ sender: Any) {
@@ -47,30 +47,41 @@ class CustomGenreViewController: UIViewController {
             self.present(noTitleErrorMsg, animated: true, completion: nil)
             return
         }
+        
+        let record = Utilities.parseInputToRecord(input: title)
+        let description = descriptionInput.text ?? ""
+        let colorString = Utilities.convertColorToHex(color: genreColor)
+        print("Genre record \(record)")
+        print("Genre desc \(description)")
+        print("Genre color string \(colorString)")
+        
+        // TODO: Firestore stuff
     }
+    
     @IBAction func discardGenreButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
-extension CustomGenreViewController: UIColorPickerViewControllerDelegate {
-    func colorPickerViewControllerDidFinish(_ colorPicker: UIColorPickerViewController) {
-        self.genreColor = colorPicker.selectedColor
-        colorView.backgroundColor = colorPicker.selectedColor
-    }
-    
+//extension CustomGenreViewController: UIColorPickerViewControllerDelegate {
+//    func colorPickerViewControllerDidFinish(_ colorPicker: UIColorPickerViewController) {
+//        self.genreColor = colorPicker.selectedColor
+//        colorView.backgroundColor = colorPicker.selectedColor
+//    }
+
 //    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
 //    }
-}
+//}

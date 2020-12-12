@@ -327,27 +327,6 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
 //        print("Dislay version: \(Utilities.parseRecordToDisplayText(record: genreRecord))")
     }
 }
-
-        //add image to storage
-//        //FIX THIS LATER
-//        db.collection("spots").whereField("uid", isEqualTo: uid!)
-//            .getDocuments() { (querySnapshot, err) in
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//                } else {
-//                    for document in querySnapshot!.documents {
-//                        docid = document.documentID
-//                        print("docid: \(docid)")
-//                        print("\(uid!)/\(docid).png")
-//                        self.storage.child("\(uid!)/\(docid).png").putData(self.imageData!, metadata: nil, completion: { _, error in
-//                            guard error == nil else {
-//                                print("Failed to Upload")
-//                                return
-//                            }
-//                        })
-//                    }
-//                }
-//        }
         
 //CODE TO REQUEST IMAGES FROM THE DATABASE
 //        storage.child("images/file.png").downloadURL(completion: {url, error in

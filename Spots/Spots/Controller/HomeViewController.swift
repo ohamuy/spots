@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
 
 
     override func viewDidLoad() {
@@ -17,10 +17,11 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
         
         search.delegate = self
         search.showsCancelButton = true
+        checkLocationServices()
 
     }
     
-    @IBOutlet var mapView: MKMapView!
+    @IBOutlet var locationMapView: MKMapView!
    
     @IBOutlet weak var search: UISearchBar!
     
@@ -30,7 +31,82 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
     let APIKey = "AIzaSyDrjVeQhWVpIJhYrrVX9vyykLhq475jjkY"
     let myArray: NSArray = ["First","Second","Third"]
     var myTableView: UITableView!
+    let manager = CLLocationManager()
+    let regionMeter: Double = 10000
  
+    //Set up location manager
+    func setUpLocationManager() {
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    //Check if location services are available
+    func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            //Set Up location manager
+            setUpLocationManager()
+            checkAppLocationAuthorization()
+        } else {
+            let alert = UIAlertController(title: "Location Service Not Enabled", message: "Please enable location services to improve user experience", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        }
+    }
+    
+    //Check Location services permission for the app
+    func checkAppLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            //Show user location on map
+            locationMapView.showsUserLocation = true
+            scaleMapToUserLocation()
+            manager.startUpdatingLocation()
+            break
+        case .denied:
+            //Show alert instructing how to enable them within settings
+            break
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            //Show alert that location is restricted
+            break
+        case .authorizedAlways:
+            break
+        @unknown default:
+            //Show alert app is too old lol
+            break
+        }
+    }
+    
+    //scale map to user location
+    //Learned here: https://www.youtube.com/watch?v=WPpaAy73nJc
+    func scaleMapToUserLocation() {
+        if let location = manager.location?.coordinate {
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionMeter, longitudinalMeters: regionMeter)
+            locationMapView.setRegion(region, animated: true)
+        }
+    }
+    
+    //Update position of person as they move on map
+    //Learned here: https://www.youtube.com/watch?v=WPpaAy73nJc
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //Updating the location of the user on the map
+        guard let location = locations.last else {return}
+        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: regionMeter, longitudinalMeters: regionMeter)
+        locationMapView.setRegion(region, animated: true)
+    }
+    
+    //Need to worry about permissions
+    //Learned here: https://www.youtube.com/watch?v=WPpaAy73nJc
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        //Changes authorization
+        checkAppLocationAuthorization()
+    }
+    
+    
+    
+    
     
     func fetchDataFromSearch(){
         if searchInput != ""{
@@ -60,10 +136,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
         }
         fetchDataFromSearch()
            
-        let displayX: CGFloat = mapView.frame.minX
-        let displayY: CGFloat = mapView.frame.minY
-        let displayWidth: CGFloat = mapView.frame.size.width
-        let displayHeight: CGFloat = mapView.frame.size.height
+        let displayX: CGFloat = locationMapView.frame.minX
+        let displayY: CGFloat = locationMapView.frame.minY
+        let displayWidth: CGFloat = locationMapView.frame.size.width
+        let displayHeight: CGFloat = locationMapView.frame.size.height
 
         myTableView = UITableView(frame: CGRect(x: displayX, y: displayY, width: displayWidth, height: displayHeight))
         myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")

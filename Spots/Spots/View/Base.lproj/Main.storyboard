@@ -617,7 +617,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="fqL-2M-Cgo"/>
                     <connections>
-                        <outlet property="mapView" destination="mZx-Gz-Crd" id="AJu-jG-2bD"/>
+                        <outlet property="locationMapView" destination="mZx-Gz-Crd" id="qLM-4F-i6k"/>
                         <outlet property="search" destination="L7M-VL-KeN" id="Km1-9t-N6S"/>
                     </connections>
                 </viewController>

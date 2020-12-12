@@ -10,6 +10,7 @@
 		133860FE257F7E8700D11441 /* SavedSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133860FD257F7E8700D11441 /* SavedSpotsViewController.swift */; };
 		13386100257F7E9900D11441 /* SpotInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133860FF257F7E9900D11441 /* SpotInfoViewController.swift */; };
 		13386102257F82C200D11441 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 13386101257F82C200D11441 /* Podfile */; };
+		133C8B682585834800261002 /* SpotsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133C8B672585834800261002 /* SpotsTableViewCell.swift */; };
 		8824DC032571A39E003D44BB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC022571A39E003D44BB /* SignUpViewController.swift */; };
 		8824DC052571A3B4003D44BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC042571A3B4003D44BB /* LoginViewController.swift */; };
 		8824DC072571A3EC003D44BB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC062571A3EC003D44BB /* HomeViewController.swift */; };
@@ -36,6 +37,7 @@
 		133860FD257F7E8700D11441 /* SavedSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotsViewController.swift; sourceTree = "<group>"; };
 		133860FF257F7E9900D11441 /* SpotInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotInfoViewController.swift; sourceTree = "<group>"; };
 		13386101257F82C200D11441 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		133C8B672585834800261002 /* SpotsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsTableViewCell.swift; sourceTree = "<group>"; };
 		58895EEF1858D5F81015B4FB /* Pods_Spots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8824DC022571A39E003D44BB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8824DC042571A3B4003D44BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				88B433802561C61B004CC97F /* Main.storyboard */,
 				88B433832561C61B004CC97F /* Assets.xcassets */,
 				88B433852561C61B004CC97F /* LaunchScreen.storyboard */,
+				133C8B672585834800261002 /* SpotsTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				8824DC052571A3B4003D44BB /* LoginViewController.swift in Sources */,
 				BDAEAA78258475D800D540B3 /* CustomGenreViewController.swift in Sources */,
 				88A8F99425744EAB00099966 /* PasswordViewController.swift in Sources */,
+				133C8B682585834800261002 /* SpotsTableViewCell.swift in Sources */,
 				BD81440A2574074C00628046 /* Constants.swift in Sources */,
 				88A2931C25819BA300D78E91 /* CustomPinViewController.swift in Sources */,
 				133860FE257F7E8700D11441 /* SavedSpotsViewController.swift in Sources */,

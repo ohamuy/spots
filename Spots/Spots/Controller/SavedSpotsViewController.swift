@@ -7,73 +7,124 @@
 //
 
 import UIKit
+import MapKit
+import FirebaseAuth
+import FirebaseStorage
+import Firebase
+import FirebaseFirestore
 
-class SavedSpotsViewController: UIViewController {
+class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //values that will be imported from elsewhere
-    var numCategories:Int!
-    var spotsList:Dictionary<String,[Spot]>!
-    var keys:[String] = []
+    var spotsList:Dictionary<String,[Spot]> = [ : ]
+    var keys:Dictionary<Int,String> = [ : ]
+    var spotsArray:[Spot] = []
     
-    override func viewDidLoad() {
-        for i in spotsList.keys {
-            keys.append(i)
-        }
-    }
+    //dummy variable for the selection of the dropdown menu
+    let ddOut:String = "all"
     
+    //user id
+    let uid = Auth.auth().currentUser?.uid
     
+    //stuff for retrieval from firestore
+    let db = Firestore.firestore()
+    var spotCollection:CollectionReference!
+    var genreCollection:CollectionReference!
     //the UITableView
     @IBOutlet var spotsTable: UITableView!
     
-
-    //counts the number of keys to return how many sections there should be
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+    @IBOutlet var genreLabel: UILabel!
+    // pseudo code
+    // pull list of genres from database ?
+    // search for things with the uid of the current user with those
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        spotsTable.register(UINib(nibName: "SpotsTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "spotCell")
+        spotCollection =  db.collection("spots")
+        genreCollection = db.collection("genres")
+        loadGenres()
+        loadDatabase()
+        spotsTable.reloadData()
     }
-        //let numCat = keys.count
-        
-    //to figure out how many sections there are
-    func countCategories (list: [Spot]) -> Int {
-        var numCat = 1
-        for i in 1...list.count-1 {
-            let firstCat = list[i].category
-            if list[i+1].category != firstCat {
-                numCat += 1 
+    
+    func loadGenres(){
+        print("in loadgenres")
+        spotCollection.whereField("uid", isEqualTo: uid).getDocuments(completion: { (snapshot, error) in
+            if let err = error {
+                debugPrint("Error fetching docs \(err)")
+            } else {
+                var i = 0
+                for document in snapshot! .documents{
+                   
+                    let genre = document.data()["genre_record"] as! String
+                    self.keys[i] = genre
+                    i += 1
+                    var theArray = self.spotsList[genre]
+                    self.spotsList[genre] = []
+                    print(self.keys)
+                }
             }
-        }
-        return numCat
+        })
+        
     }
     
-    //makes the header of the section the name of the category
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return keys[section]
+    func loadDatabase() {
+        spotCollection.whereField("uid", isEqualTo: uid).getDocuments(completion: { (snapshot, error) in
+            if let err = error {
+                debugPrint("Error fetching docs \(err)")
+            } else {
+                for document in snapshot! .documents{
+                    guard let snap = snapshot else { return }
+                    //                    print("\(document.data()["title"] as! String)")
+                    let title = document.data()["title"] as! String
+                    let subtitle = document.data()["subtitle"] as! String
+                    let genre = document.data()["genre_record"] as! String
+                    let lat = document.data()["latitude"] as! CLLocationDegrees
+                    let long = document.data()["longitude"] as! CLLocationDegrees
+                    let location = CLLocationCoordinate2DMake(lat , long )
+                    let addSpot = Spot(label: title , locationName: subtitle, category: 0, coordinate: location)
+                    self.spotsList[genre]!.append(addSpot)
+                    //                    self.spotsArray.append(addSpot)
+                    print("completed add",title)
+                }
+            }
+        })
+        
     }
     
-    //counts the number of elements in each section to see how many rows there are
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return spotsList[keys[section]]?.count ?? 0
+        if ddOut == "all" {
+            return spotsList.values.count
+        }
+        else {
+            return spotsList[ddOut]?.count ?? 0
+        }
     }
     
-    //used a bunch of pastel colors but this can be changed later
-    let colorPalette = [ UIColor(red: 255/255, green: 103/255, blue: 147/255, alpha: 1), UIColor(red: 255/255, green: 161/255, blue: 101/255, alpha: 1),  UIColor(red: 255/255, green: 255/255, blue: 172/255, alpha: 1), UIColor(red: 190/255  , green: 255/255, blue: 132/255, alpha: 1), UIColor(red: 171/255, green: 255/255, blue: 255/255, alpha: 1), UIColor(red: 197/255, green: 179/255, blue: 255/255, alpha: 1)]
-    
-    //setting up table cells
+    //    setting up table cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Create a cell to return
-        let spotCell = spotsTable.dequeueReusableCell(withIdentifier: "cell")!
+        // Create a custom cell to return
+        let spotCell = spotsTable.dequeueReusableCell(withIdentifier: "spotCell") as! SpotsTableViewCell
+
         // indexPath has two properties, `section` and `row`.
-        let spotArray = spotsList[keys[indexPath.section]]
-        let label = spotArray?[indexPath.row].label
-        spotCell.textLabel?.text = label
-        spotCell.backgroundColor = colorPalette[indexPath.section]
+        let theKey = keys[indexPath.section]
+        spotCell.backgroundColor = UIColor.green
+        spotCell.spotTitle.text = spotsList[theKey!]![indexPath.row].label
+        spotCell.spotSubtitle.text = spotsList[theKey!]![indexPath.row].locationName
+        //        spotCell.spotImage =
         return spotCell
     }
     
     //when an item is selected, a new view controller that shows details about that spot will be pushed forward
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let spotInfoVC = storyboard!.instantiateViewController(identifier: "spotInfo") as SpotInfoViewController
-        //        detailedVC.image = theImageCache[indexPath.row]
-        //spotInfoVC.clickedSpot = spotsList[indexPath.row]
-        //navigationController?.pushViewController(detailedVC, animated: true)
+        let spotInfoVC = storyboard!.instantiateViewController(identifier: "spotInfo") as SpotInfoViewController
+        let theKey = keys[indexPath.section]
+        spotInfoVC.clickedSpot = spotsList[theKey!]![indexPath.row]
+        navigationController?.pushViewController(spotInfoVC, animated: true)
     }
 }

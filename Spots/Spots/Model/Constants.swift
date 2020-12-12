@@ -9,10 +9,7 @@
 import Foundation
 
 // Genre codes
-let FOOD = 0
-let WORK = 1
-let ENTERTAINMENT = 2
-let NATURE = 3
+let NO_GENRE = "null"
 
 // customPin constants
 let CONFIRM = 0

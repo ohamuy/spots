@@ -82,6 +82,9 @@ class Utilities {
     
     // prepare record name for display to user
     static func parseRecordToDisplayText (record: String) -> String {
+        if record == NO_GENRE {
+            return "No Genre"
+        }
         let components = record.components(separatedBy: "_")
         var rejoin = [String]();
         for c in components {

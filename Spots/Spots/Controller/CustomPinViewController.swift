@@ -134,16 +134,29 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     
     //adds spot to firebase
     @IBAction func finishTapped(_ sender: Any) {
-        //add spot to firestore database
-        let uid = Auth.auth().currentUser?.uid
-        var docid = ""
+        
+        // check if title exists
+        let title = titleInputField.text ?? ""
+        if title.isEmpty {
+            let noTitleErrorMsg = UIAlertController(title: "Title Required", message: "Spots need a name. Add something to the title field, then try again.", preferredStyle: .alert)
+            noTitleErrorMsg.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Go back"), style: .default, handler: { _ in
+                NSLog("Err: no title on pin save")
+            }))
+            self.present(noTitleErrorMsg, animated: true, completion: nil)
+            return
+        }
         
         var genreRecord = genreInputField.text ?? "null_genre";
         genreRecord = Utilities.parseInputToRecord(input:  genreRecord);
         
         // *** var genreRecord ready for storage in DB
+        print("Pin title: \(title)")
         print("Record version: \(genreRecord)");
         print("Dislay version: \(Utilities.parseRecordToDisplayText(record: genreRecord))")
+        
+        //add spot to firestore database
+        let uid = Auth.auth().currentUser?.uid
+        var docid = ""
         
         //FIX THIS LATER
         db.collection("spots").whereField("uid", isEqualTo: uid!)
@@ -180,10 +193,23 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
 //            }
 //        })
         
-//        clearPin()
+        clearPin()
     }
     
-//    func clearPin() {
-//
-//    }
+    func clearPin() {
+        let genre = genreInputField.text ?? "null_genre"
+        let confirm = UIAlertController(title: "Pin Created", message: "\(titleInputField.text!) was successfully added to your network \(Utilities.parseRecordToDisplayText(record: Utilities.parseInputToRecord(input: genre))).", preferredStyle: .alert)
+        confirm.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm"), style: .default, handler: { _ in
+            NSLog("Pin add confirmed, reset VC")
+        }))
+        self.present(confirm, animated: true, completion: nil)
+        
+        titleInputField.text = ""
+        genreInputField.text = ""
+        subtitleTextField.text = ""
+        
+        imagePreview.image = nil
+        titlePreview.text = ""
+        subtitlePreview.text = ""
+    }
 }

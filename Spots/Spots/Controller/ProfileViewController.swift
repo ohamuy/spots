@@ -126,8 +126,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
                     print("Error getting documents: \(err)")
                 } else {
                     self.numberOfSpots = 0
-                    for document in querySnapshot!.documents {
-                        print(document.get("title")!)
+                    for _ in querySnapshot!.documents {
                         self.numberOfSpots += 1
                     }
                     self.savedSpots.text = String(self.numberOfSpots)

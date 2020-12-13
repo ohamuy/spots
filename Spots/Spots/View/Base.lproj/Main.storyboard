@@ -1031,9 +1031,8 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Yp-V1-D7g">
-                                <rect key="frame" x="333" y="153" width="26" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Yp-V1-D7g">
+                                <rect key="frame" x="333" y="151" width="26" height="22"/>
                                 <color key="tintColor" red="0.047363199809999999" green="0.70350955309999996" blue="0.65589547199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="trash.circle" catalog="system"/>
                                 <connections>
@@ -1043,6 +1042,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="2Yp-V1-D7g" firstAttribute="leading" secondItem="B0w-mQ-9q0" secondAttribute="leading" constant="333" id="2Cf-wX-nGp"/>
                             <constraint firstItem="GAx-We-PrN" firstAttribute="top" secondItem="1QC-bb-n4Z" secondAttribute="bottom" constant="8" id="4vo-U1-u9j"/>
                             <constraint firstItem="B0w-mQ-9q0" firstAttribute="trailing" secondItem="Dty-2r-Imo" secondAttribute="trailing" constant="16" id="81Y-vh-KDI"/>
                             <constraint firstItem="1QC-bb-n4Z" firstAttribute="trailing" secondItem="Dty-2r-Imo" secondAttribute="trailing" id="8eI-gM-lqi"/>
@@ -1052,10 +1052,12 @@
                             <constraint firstItem="B0w-mQ-9q0" firstAttribute="bottom" secondItem="NXG-9j-f9d" secondAttribute="bottom" constant="14" id="O0k-zL-L3V"/>
                             <constraint firstItem="B0w-mQ-9q0" firstAttribute="bottom" secondItem="1QC-bb-n4Z" secondAttribute="bottom" constant="358" id="PgG-0q-qjv"/>
                             <constraint firstItem="1QC-bb-n4Z" firstAttribute="top" secondItem="Dty-2r-Imo" secondAttribute="bottom" constant="8" id="Q4R-Jg-l7I"/>
+                            <constraint firstItem="B0w-mQ-9q0" firstAttribute="trailing" secondItem="2Yp-V1-D7g" secondAttribute="trailing" constant="16" id="SlS-3q-j1y"/>
                             <constraint firstItem="tdW-Uw-GRr" firstAttribute="top" secondItem="B0w-mQ-9q0" secondAttribute="top" id="SyL-dQ-f0Y"/>
                             <constraint firstItem="1QC-bb-n4Z" firstAttribute="leading" secondItem="Dty-2r-Imo" secondAttribute="leading" id="TPW-qv-OWU"/>
                             <constraint firstItem="Dty-2r-Imo" firstAttribute="top" secondItem="tdW-Uw-GRr" secondAttribute="bottom" constant="28.333333333333343" id="Tfp-dW-NT4"/>
                             <constraint firstItem="GAx-We-PrN" firstAttribute="leading" secondItem="B0w-mQ-9q0" secondAttribute="leading" constant="16" id="UwJ-xi-k5S"/>
+                            <constraint firstItem="2Yp-V1-D7g" firstAttribute="top" secondItem="tdW-Uw-GRr" secondAttribute="bottom" constant="26" id="XfJ-9E-AlV"/>
                             <constraint firstItem="1QC-bb-n4Z" firstAttribute="top" secondItem="Dty-2r-Imo" secondAttribute="bottom" constant="8" id="ale-9f-rZp"/>
                             <constraint firstItem="NXG-9j-f9d" firstAttribute="trailing" secondItem="yHF-la-Sqa" secondAttribute="trailing" id="bOw-f4-QJU"/>
                             <constraint firstItem="yHF-la-Sqa" firstAttribute="leading" secondItem="B0w-mQ-9q0" secondAttribute="leading" constant="16" id="c9l-75-qVi"/>

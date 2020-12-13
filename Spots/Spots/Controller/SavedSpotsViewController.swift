@@ -30,6 +30,8 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
     let db = Firestore.firestore()
     var spotCollection:CollectionReference!
     var genreCollection:CollectionReference!
+    let storage = Storage.storage().reference()
+    
     //the UITableView
     @IBOutlet var spotsTable: UITableView!
     
@@ -56,7 +58,7 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
             } else {
                 var i = 0
                 for document in snapshot! .documents{
-                   
+                    
                     let genre = document.data()["genre_record"] as! String
                     self.keys[i] = genre
                     i += 1
@@ -110,13 +112,34 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Create a custom cell to return
         let spotCell = spotsTable.dequeueReusableCell(withIdentifier: "spotCell") as! SpotsTableViewCell
-
+        
         // indexPath has two properties, `section` and `row`.
         let theKey = keys[indexPath.section]
         spotCell.backgroundColor = UIColor.green
         spotCell.spotTitle.text = spotsList[theKey!]![indexPath.row].label
         spotCell.spotSubtitle.text = spotsList[theKey!]![indexPath.row].locationName
-        //        spotCell.spotImage =
+        
+        storage.child("images/file.png").downloadURL(completion: {url, error in
+            guard let url = url, error == nil else {
+                return
+            }
+            
+            let urlString = url.absoluteString
+            print("url \(urlString)")
+            let urlFinal = URL(string: urlString)
+            let task = URLSession.shared.dataTask(with: urlFinal!, completionHandler: { data, _, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    let image = UIImage(data: data)
+                    spotCell.spotImage.image  = image
+                }
+            })
+            task.resume()
+        })
+        
         return spotCell
     }
     

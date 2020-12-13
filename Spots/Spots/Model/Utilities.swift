@@ -52,6 +52,16 @@ class Utilities {
         label.layer.addSublayer(underline)
     }
     
+    static func styleButtonForProfile(_ button:UIButton) {
+        let thickness: CGFloat = 2.0
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0.0, y: 0.0, width: button.frame.size.width, height: thickness)
+        //button.layer.borderWidth = 3
+        button.layer.addSublayer(topBorder)
+        topBorder.backgroundColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1).cgColor
+    }
+    
+    
     static func styleButton(_ button:UIButton) {
         button.backgroundColor = UIColor.init(red: 37/255, green: 139/255, blue: 144/255, alpha: 1)
         button.layer.cornerRadius = 15.0

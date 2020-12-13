@@ -50,6 +50,7 @@ class NewPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerCo
         
         if newPin != nil{
             titleInputField.text = newPin!.name
+            titlePreview.text = newPin!.name
             if newPin!.geometry != nil{
                 if newPin?.geometry?.location != nil{
                     coordinateData = CLLocationCoordinate2D(latitude: newPin!.geometry!.location!.lat, longitude: newPin!.geometry!.location!.lng)
@@ -274,15 +275,31 @@ class NewPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerCo
         }
         
         //add content to database
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        let userLat = Double(round(10000*locValue.latitude)/10000)
+        let userLong = Double(round(10000*locValue.longitude)/10000)
+        let annZeroLat = Double(round(10000*annotation[0].coordinate.latitude)/10000)
+        let annZeroLong = Double(round(10000*annotation[0].coordinate.longitude)/10000)
+        let annOneLat = Double(round(10000*annotation[1].coordinate.latitude)/10000)
+        let annOneLong = Double(round(10000*annotation[1].coordinate.longitude)/10000)
+        
+        var index = 0
+        
+        if annZeroLat == userLat && annZeroLong == userLong {
+            index = 1
+        } else if annOneLat == userLat && annOneLong == userLong {
+            index = 0
+        }
         db.collection("spots").addDocument(data: [
             "uid" : uid!,
             "title" : titleInputField.text!,
             "subtitle" : subtitle,
             "genre_record" : "null", //CHANGE THIS LATER TO BE GENRE RECORD
-            "longitude" : annotation[1].coordinate.longitude,
-            "latitude" : annotation[1].coordinate.latitude
+            "longitude" : annotation[index].coordinate.longitude,
+            "latitude" : annotation[index].coordinate.latitude
         ])
-
+        
+        
         
         
         if (imagePreview.image != nil ) {

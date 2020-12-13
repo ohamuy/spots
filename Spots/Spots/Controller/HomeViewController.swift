@@ -32,6 +32,14 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
         updateMap()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+            if myTableView != nil{
+               search.text = ""
+               search.showsCancelButton = false
+               myTableView.removeFromSuperview()
+           }
+    }
+    
     let db = Firestore.firestore()
     var theData: APIResults?
     var searchInput: String = ""
@@ -172,11 +180,28 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
         let displayWidth: CGFloat = locationMapView.frame.size.width
         let displayHeight: CGFloat = locationMapView.frame.size.height
         
-        myTableView = UITableView(frame: CGRect(x: displayX, y: displayY, width: displayWidth, height: displayHeight))
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
-        myTableView.dataSource = self
-        myTableView.delegate = self
-        self.view.addSubview(myTableView)
+        if theData != nil{
+            if theData!.results.count > 0 {
+                myTableView = UITableView(frame: CGRect(x: displayX, y: displayY, width: displayWidth, height: displayHeight))
+                myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+                myTableView.dataSource = self
+                myTableView.delegate = self
+                self.view.addSubview(myTableView)
+            } else{
+                let alert = UIAlertController(title: "Alert", message: "No Results.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "No Results.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    
     }
     
     

@@ -1017,7 +1017,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Yp-V1-D7g">
-                                <rect key="frame" x="326" y="389" width="26" height="22"/>
+                                <rect key="frame" x="333" y="153" width="26" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.047363199809999999" green="0.70350955309999996" blue="0.65589547199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="trash.circle" catalog="system"/>
@@ -1065,7 +1065,7 @@
                         <outlet property="subtitlePreview" destination="rQO-U8-D7e" id="lVi-HV-9HR"/>
                         <outlet property="subtitleTextField" destination="PdK-cM-Bsw" id="tlb-Tt-nUL"/>
                         <outlet property="titleInputField" destination="qKA-6O-LZz" id="P8P-B0-UjD"/>
-                        <outlet property="titlePreview" destination="QZw-gI-UNd" id="bpR-b8-8IR"/>
+                        <outlet property="titlePreview" destination="QZw-gI-UNd" id="YJR-Ku-t0s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CrY-LT-gjN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

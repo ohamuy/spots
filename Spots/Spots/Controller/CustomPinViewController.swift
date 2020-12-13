@@ -283,14 +283,31 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         }
         
         //add content to database
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        let userLat = Double(round(10000*locValue.latitude)/10000)
+        let userLong = Double(round(10000*locValue.longitude)/10000)
+        let annZeroLat = Double(round(10000*annotation[0].coordinate.latitude)/10000)
+        let annZeroLong = Double(round(10000*annotation[0].coordinate.longitude)/10000)
+        let annOneLat = Double(round(10000*annotation[1].coordinate.latitude)/10000)
+        let annOneLong = Double(round(10000*annotation[1].coordinate.longitude)/10000)
+        
+        
+        var index = 0
+        
+        if annZeroLat == userLat && annZeroLong == userLong {
+            index = 1
+        } else if annOneLat == userLat && annOneLong == userLong {
+            index = 0
+        }
         db.collection("spots").addDocument(data: [
             "uid" : uid!,
             "title" : titleInputField.text!,
             "subtitle" : subtitle,
             "genre_record" : "null", //CHANGE THIS LATER TO BE GENRE RECORD
-            "longitude" : annotation[0].coordinate.longitude,
-            "latitude" : annotation[0].coordinate.latitude
+            "longitude" : annotation[index].coordinate.longitude,
+            "latitude" : annotation[index].coordinate.latitude
         ])
+        
         
         
         if (imagePreview.image != nil ) {
@@ -318,16 +335,16 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         
         //TESTING CODE FOR GENRES
         //add spot to firestore database
-//        var genreRecord = genreInputField.text ?? "null_genre";
-//        genreRecord = Utilities.parseInputToRecord(input:  genreRecord);
-
+        //        var genreRecord = genreInputField.text ?? "null_genre";
+        //        genreRecord = Utilities.parseInputToRecord(input:  genreRecord);
+        
         // *** var genreRecord ready for storage in DB
-//        print("Pin title: \(title)")
-//        print("Record version: \(genreRecord)");
-//        print("Dislay version: \(Utilities.parseRecordToDisplayText(record: genreRecord))")
+        //        print("Pin title: \(title)")
+        //        print("Record version: \(genreRecord)");
+        //        print("Dislay version: \(Utilities.parseRecordToDisplayText(record: genreRecord))")
     }
 }
-        
+
 //CODE TO REQUEST IMAGES FROM THE DATABASE
 //        storage.child("images/file.png").downloadURL(completion: {url, error in
 //            guard let url = url, error == nil else {

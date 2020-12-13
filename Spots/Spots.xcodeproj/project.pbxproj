@@ -26,7 +26,6 @@
 		88B433842561C61B004CC97F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88B433832561C61B004CC97F /* Assets.xcassets */; };
 		88B433872561C61B004CC97F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88B433852561C61B004CC97F /* LaunchScreen.storyboard */; };
 		88C040BD25732B33007DD89E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C040BC25732B33007DD89E /* TabBarController.swift */; };
-		88DABFDC25856D5D00E163E3 /* APIStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DABFDB25856D5D00E163E3 /* APIStructs.swift */; };
 		88F21AB0256CB94D007F3613 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88F21AAF256CB94D007F3613 /* GoogleService-Info.plist */; };
 		BD8144072574059E00628046 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8144062574059E00628046 /* Spot.swift */; };
 		BD81440A2574074C00628046 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8144092574074C00628046 /* Constants.swift */; };
@@ -57,7 +56,6 @@
 		88B433862561C61B004CC97F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88B433882561C61B004CC97F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88C040BC25732B33007DD89E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		88DABFDB25856D5D00E163E3 /* APIStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIStructs.swift; sourceTree = "<group>"; };
 		88F21AAF256CB94D007F3613 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B6EE236CBA37218105CB9A01 /* Pods-Spots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spots.debug.xcconfig"; path = "Target Support Files/Pods-Spots/Pods-Spots.debug.xcconfig"; sourceTree = "<group>"; };
 		BD8144062574059E00628046 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 		88B433902561C888004CC97F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				88DABFDB25856D5D00E163E3 /* APIStructs.swift */,
 				889C34A42572E78A000183E5 /* Utilities.swift */,
 				0902B0D225866D2500C1D8CB /* APIStructs.swift */,
 				BD8144062574059E00628046 /* Spot.swift */,
@@ -301,7 +298,6 @@
 				889C34A52572E78A000183E5 /* Utilities.swift in Sources */,
 				88A8F992257439DA00099966 /* ProfileViewController.swift in Sources */,
 				88B4337D2561C61B004CC97F /* SceneDelegate.swift in Sources */,
-				88DABFDC25856D5D00E163E3 /* APIStructs.swift in Sources */,
 				BD8144072574059E00628046 /* Spot.swift in Sources */,
 				8824DC072571A3EC003D44BB /* HomeViewController.swift in Sources */,
 				0902B0D1258574E000C1D8CB /* NewPinViewController.swift in Sources */,

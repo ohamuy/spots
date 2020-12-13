@@ -58,7 +58,7 @@ class Utilities {
         topBorder.frame = CGRect(x: 0.0, y: 0.0, width: button.frame.size.width, height: thickness)
         //button.layer.borderWidth = 3
         button.layer.addSublayer(topBorder)
-        topBorder.backgroundColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1).cgColor
+        topBorder.backgroundColor = UIColor.init(red: 234/255, green: 226/255, blue: 197/255, alpha: 1).cgColor
     }
     
     

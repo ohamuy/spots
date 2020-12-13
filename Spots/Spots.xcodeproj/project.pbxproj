@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0902B0D1258574E000C1D8CB /* NewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0902B0D0258574E000C1D8CB /* NewPinViewController.swift */; };
+		0902B0D325866D2600C1D8CB /* APIStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0902B0D225866D2500C1D8CB /* APIStructs.swift */; };
 		133860FE257F7E8700D11441 /* SavedSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133860FD257F7E8700D11441 /* SavedSpotsViewController.swift */; };
 		13386100257F7E9900D11441 /* SpotInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133860FF257F7E9900D11441 /* SpotInfoViewController.swift */; };
 		13386102257F82C200D11441 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 13386101257F82C200D11441 /* Podfile */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0902B0D0258574E000C1D8CB /* NewPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPinViewController.swift; sourceTree = "<group>"; };
+		0902B0D225866D2500C1D8CB /* APIStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIStructs.swift; path = Spots/Model/APIStructs.swift; sourceTree = SOURCE_ROOT; };
 		133860FD257F7E8700D11441 /* SavedSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotsViewController.swift; sourceTree = "<group>"; };
 		133860FF257F7E9900D11441 /* SpotInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotInfoViewController.swift; sourceTree = "<group>"; };
 		13386101257F82C200D11441 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 				133860FF257F7E9900D11441 /* SpotInfoViewController.swift */,
 				88A2931B25819BA300D78E91 /* CustomPinViewController.swift */,
 				BDAEAA77258475D800D540B3 /* CustomGenreViewController.swift */,
+				0902B0D0258574E000C1D8CB /* NewPinViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 			children = (
 				88DABFDB25856D5D00E163E3 /* APIStructs.swift */,
 				889C34A42572E78A000183E5 /* Utilities.swift */,
+				0902B0D225866D2500C1D8CB /* APIStructs.swift */,
 				BD8144062574059E00628046 /* Spot.swift */,
 				BD8144092574074C00628046 /* Constants.swift */,
 			);
@@ -285,6 +291,7 @@
 				88B4337B2561C61B004CC97F /* AppDelegate.swift in Sources */,
 				8824DC032571A39E003D44BB /* SignUpViewController.swift in Sources */,
 				8824DC052571A3B4003D44BB /* LoginViewController.swift in Sources */,
+				0902B0D325866D2600C1D8CB /* APIStructs.swift in Sources */,
 				BDAEAA78258475D800D540B3 /* CustomGenreViewController.swift in Sources */,
 				88A8F99425744EAB00099966 /* PasswordViewController.swift in Sources */,
 				BD81440A2574074C00628046 /* Constants.swift in Sources */,
@@ -297,6 +304,7 @@
 				88DABFDC25856D5D00E163E3 /* APIStructs.swift in Sources */,
 				BD8144072574059E00628046 /* Spot.swift in Sources */,
 				8824DC072571A3EC003D44BB /* HomeViewController.swift in Sources */,
+				0902B0D1258574E000C1D8CB /* NewPinViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

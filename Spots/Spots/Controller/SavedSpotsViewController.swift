@@ -21,7 +21,7 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
     var spotsArray:[Spot] = []
     
     //dummy variable for the selection of the dropdown menu
-    let ddOut:String = "all"
+    let ddOut:String = "null"
     
     //user id
     let uid = Auth.auth().currentUser?.uid
@@ -39,20 +39,28 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
     // pseudo code
     // pull list of genres from database ?
     // search for things with the uid of the current user with those
+ 
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        self.loadData()
+//    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.spotsTable.dataSource = self
+        self.spotsTable.delegate = self
         spotsTable.register(UINib(nibName: "SpotsTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "spotCell")
         spotCollection =  db.collection("spots")
         genreCollection = db.collection("genres")
         loadGenres()
-        loadDatabase()
-        spotsTable.reloadData()
+        loadData()
+        self.spotsTable.reloadData()
     }
     
     func loadGenres(){
         print("in loadgenres")
-        spotCollection.whereField("uid", isEqualTo: uid).getDocuments(completion: { (snapshot, error) in
+        spotCollection.whereField("uid", isEqualTo: uid!).getDocuments(completion: { (snapshot, error) in
             if let err = error {
                 debugPrint("Error fetching docs \(err)")
             } else {
@@ -71,7 +79,7 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-    func loadDatabase() {
+    func loadData() {
         spotCollection.whereField("uid", isEqualTo: uid).getDocuments(completion: { (snapshot, error) in
             if let err = error {
                 debugPrint("Error fetching docs \(err)")
@@ -88,8 +96,11 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
                     let addSpot = Spot(label: title , locationName: subtitle, category: 0, coordinate: location)
                     self.spotsList[genre]!.append(addSpot)
                     //                    self.spotsArray.append(addSpot)
+                   // var list = self.spotsList[genre]!
                     print("completed add",title)
+                    //print(list)
                 }
+                print(self.spotsList)
             }
         })
         
@@ -100,7 +111,7 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if ddOut == "all" {
+        if ddOut == "null" {
             return spotsList.values.count
         }
         else {
@@ -108,15 +119,21 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    private func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 50
+    }
+    
     //    setting up table cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Create a custom cell to return
+        print(spotsList)
         let spotCell = spotsTable.dequeueReusableCell(withIdentifier: "spotCell") as! SpotsTableViewCell
         
         // indexPath has two properties, `section` and `row`.
         let theKey = keys[indexPath.section]
         spotCell.backgroundColor = UIColor.green
-        spotCell.spotTitle.text = spotsList[theKey!]![indexPath.row].label
+        spotCell.spotTitle.text = spotsList["null"]![indexPath.row].label
+        
         spotCell.spotSubtitle.text = spotsList[theKey!]![indexPath.row].locationName
         
         storage.child("images/file.png").downloadURL(completion: {url, error in
@@ -135,6 +152,7 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
                 DispatchQueue.main.async {
                     let image = UIImage(data: data)
                     spotCell.spotImage.image  = image
+                    self.spotsTable.reloadData()
                 }
             })
             task.resume()

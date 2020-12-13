@@ -170,13 +170,13 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     
     @IBAction func resetDataButtonTapped(_ sender: Any) {
         let confirm = UIAlertController(title: "Confirm Reset", message: "Are you sure you want to clear the pin in-progress?", preferredStyle: .alert)
-        confirm.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Confirm"), style: .default, handler: { _ in
-            NSLog("Pin clear confirmed, reset VC")
-            self.clearPin(mode: RESET)
-        }))
         confirm.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Confirm"), style: .default, handler: { _ in
             NSLog("Pin clear aborted")
             return
+        }))
+        confirm.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Confirm"), style: .default, handler: { _ in
+            NSLog("Pin clear confirmed, reset VC")
+            self.clearPin(mode: RESET)
         }))
         self.present(confirm, animated: true, completion: nil)
     }

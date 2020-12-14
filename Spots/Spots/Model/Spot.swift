@@ -13,7 +13,6 @@ class Spot: NSObject, MKAnnotation {
     let label: String?
     let locationName: String
     let genre_record: String
-
     let coordinate: CLLocationCoordinate2D
     
     init(label:String, locationName:String, genre_record:String, coordinate: CLLocationCoordinate2D) {

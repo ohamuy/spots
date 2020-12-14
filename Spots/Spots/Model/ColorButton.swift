@@ -18,7 +18,7 @@ class ColorButton: UIButton {
     func createButton() {
         layer.cornerRadius = 0.5 * bounds.size.width
         clipsToBounds = true
-        layer.borderWidth = 2.0
+        layer.borderWidth = 3.0
         layer.borderColor = UIColor.clear.cgColor
     }
 }

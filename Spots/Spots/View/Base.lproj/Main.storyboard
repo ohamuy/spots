@@ -441,7 +441,7 @@
                                 <rect key="frame" x="286" y="70" width="73" height="30"/>
                                 <state key="normal" title="Add Genre"/>
                                 <connections>
-                                    <segue destination="d0U-hz-kAF" kind="show" id="Z5c-0B-rzi"/>
+                                    <segue destination="d0U-hz-kAF" kind="show" id="zI9-Fw-56A"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1048,7 +1048,7 @@
                                         <rect key="frame" x="255.33333333333329" y="0.0" width="29.666666666666657" height="30"/>
                                         <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="selectBlack:" destination="d0U-hz-kAF" eventType="touchUpInside" id="HhZ-bS-i0L"/>
+                                            <action selector="selectBlack:" destination="d0U-hz-kAF" eventType="touchUpInside" id="eeC-o4-v1c"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1061,12 +1061,13 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZH-l3-whI">
                                 <rect key="frame" x="45" y="469" width="285" height="42"/>
-                                <color key="backgroundColor" red="0.2784313725" green="0.2784313725" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="No color"/>
                                 <connections>
                                     <action selector="confirmPasswords:" destination="ht1-K4-bT7" eventType="touchUpInside" id="9FS-4T-Ps5"/>
+                                    <action selector="noColorTapped:" destination="d0U-hz-kAF" eventType="touchUpInside" id="fMR-9e-u5i"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="MMu-CK-FtJ">
@@ -1080,6 +1081,7 @@
                                         <state key="normal" title="Save"/>
                                         <connections>
                                             <action selector="confirmPasswords:" destination="ht1-K4-bT7" eventType="touchUpInside" id="hj6-Hq-VpG"/>
+                                            <action selector="saveGenreButtonTapped:" destination="d0U-hz-kAF" eventType="touchUpInside" id="EpZ-On-aj0"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1K3-aF-9DV">
@@ -1089,6 +1091,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Cancel"/>
                                         <connections>
+                                            <action selector="cancelButtonTapped:" destination="d0U-hz-kAF" eventType="touchUpInside" id="D8F-7B-iFg"/>
                                             <action selector="confirmPasswords:" destination="ht1-K4-bT7" eventType="touchUpInside" id="hoW-eT-4b8"/>
                                         </connections>
                                     </button>
@@ -1153,7 +1156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Zv-wJ-jSU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2389.5999999999999" y="2259.6059113300494"/>
+            <point key="canvasLocation" x="2390" y="2260"/>
         </scene>
         <!--Search-->
         <scene sceneID="1y1-dj-QYB">

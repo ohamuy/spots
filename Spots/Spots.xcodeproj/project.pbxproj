@@ -18,6 +18,7 @@
 		8824DC072571A3EC003D44BB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC062571A3EC003D44BB /* HomeViewController.swift */; };
 		882EC0CA2587091200470E93 /* SavedTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882EC0C92587091200470E93 /* SavedTabViewController.swift */; };
 		882EC0CC2587110900470E93 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882EC0CB2587110900470E93 /* SpinnerViewController.swift */; };
+		882EC0CE2587262C00470E93 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882EC0CD2587262C00470E93 /* TestViewController.swift */; };
 		889C34A52572E78A000183E5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C34A42572E78A000183E5 /* Utilities.swift */; };
 		88A2931C25819BA300D78E91 /* CustomPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2931B25819BA300D78E91 /* CustomPinViewController.swift */; };
 		88A8F992257439DA00099966 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8F991257439DA00099966 /* ProfileViewController.swift */; };
@@ -50,6 +51,7 @@
 		8824DC062571A3EC003D44BB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		882EC0C92587091200470E93 /* SavedTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTabViewController.swift; sourceTree = "<group>"; };
 		882EC0CB2587110900470E93 /* SpinnerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
+		882EC0CD2587262C00470E93 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		889C34A42572E78A000183E5 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		88A2931B25819BA300D78E91 /* CustomPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPinViewController.swift; sourceTree = "<group>"; };
 		88A8F991257439DA00099966 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				882EC0C92587091200470E93 /* SavedTabViewController.swift */,
 				882EC0CB2587110900470E93 /* SpinnerViewController.swift */,
 				0902B0D0258574E000C1D8CB /* NewPinViewController.swift */,
+				882EC0CD2587262C00470E93 /* TestViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 			files = (
 				882EC0CC2587110900470E93 /* SpinnerViewController.swift in Sources */,
 				88B4337F2561C61B004CC97F /* ViewController.swift in Sources */,
+				882EC0CE2587262C00470E93 /* TestViewController.swift in Sources */,
 				88C040BD25732B33007DD89E /* TabBarController.swift in Sources */,
 				88B4337B2561C61B004CC97F /* AppDelegate.swift in Sources */,
 				8824DC032571A39E003D44BB /* SignUpViewController.swift in Sources */,

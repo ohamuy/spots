@@ -61,6 +61,11 @@ class Utilities {
         topBorder.backgroundColor = UIColor.init(red: 234/255, green: 226/255, blue: 197/255, alpha: 1).cgColor
     }
     
+    static func styleTableView(_ tableView: UITableView) {
+        tableView.layer.borderColor = UIColor.init(red: 37/255, green: 139/255, blue: 144/255, alpha: 1).cgColor
+        tableView.layer.borderWidth = 3
+        tableView.layer.cornerRadius = 5.0
+    }
     
     static func styleButton(_ button:UIButton) {
         button.backgroundColor = UIColor.init(red: 37/255, green: 139/255, blue: 144/255, alpha: 1)
@@ -87,6 +92,9 @@ class Utilities {
     // clear user input for firestore record
     static func parseInputToRecord (input: String) -> String {
         let clean = input.trimmingCharacters(in: .whitespacesAndNewlines)
+        if (clean == "No Genre") {
+            return "null"
+        }
         return clean.lowercased().replacingOccurrences(of: " ", with: "_")
     }
     
@@ -98,7 +106,6 @@ class Utilities {
         let components = record.components(separatedBy: "_")
         var rejoin = [String]();
         for c in components {
-            print(c)
             if !connectors.contains(c) {
                 rejoin.append(c.prefix(1).uppercased() + c.lowercased().dropFirst())
             }

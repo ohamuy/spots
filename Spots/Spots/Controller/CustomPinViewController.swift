@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseAuth
 import Firebase
 
-class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
+class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var pageTitle: UILabel!
     @IBOutlet weak var locationTitle: UILabel!
@@ -21,7 +21,6 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     @IBOutlet weak var finishButton: UIButton!
     
     @IBOutlet weak var titleInputField: UITextField!
-    @IBOutlet weak var genreInputField: UITextField!
     @IBOutlet weak var subtitleTextField: UITextField!
     
     @IBOutlet weak var titlePreview: UILabel!
@@ -29,15 +28,19 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     @IBOutlet weak var imagePreview: UIImageView!
     
     @IBOutlet weak var locationMapView: MKMapView!
+    @IBOutlet weak var tableViewDropdown: UITableView!
     
     var coordinateData: CLLocationCoordinate2D?
     var currentAnnotation: MKPointAnnotation?
+    @IBOutlet weak var selectGenreButton: UIButton!
     
     let storage = Storage.storage().reference()
     var imageData: Data?
     let db = Firestore.firestore()
     let manager = CLLocationManager()
     let regionMeter: Double = 10000
+    var genres: [String] = []
+    var selectedGenre = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +52,11 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         currentAnnotation = nil
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+         genres = []
+         tableViewSetup()
+     }
+    
     //Add styling to all labels, buttons and fields
     func setDefault () {
         Utilities.styleLabel(pageTitle)
@@ -56,9 +64,61 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         Utilities.styleLabel(previewTitle)
         Utilities.styleButton(addImageButton)
         Utilities.styleButton(finishButton)
+        Utilities.styleButton(selectGenreButton)
         Utilities.styleTextFieldAppContent(titleInputField)
-        Utilities.styleTextFieldAppContent(genreInputField)
         Utilities.styleTextFieldAppContent(subtitleTextField)
+        Utilities.styleTableView(tableViewDropdown)
+    }
+    
+    func tableViewSetup() {
+        populateGenreTable()
+        tableViewDropdown.dataSource = self
+        tableViewDropdown.delegate = self
+        tableViewDropdown.register(UITableViewCell.self, forCellReuseIdentifier: "tableCell")
+        tableViewDropdown.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return genres.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "tableCell")
+        cell.textLabel!.text = genres[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let genre = genres[indexPath.row]
+        selectedGenre = Utilities.parseInputToRecord(input: genre)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.tableViewDropdown.isHidden = !self.tableViewDropdown.isHidden
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func populateGenreTable() {
+        let uid = Auth.auth().currentUser?.uid
+        db.collection("genres").whereField("uid", isEqualTo: uid!).getDocuments() { (snapshot, error) in
+            if let err = error {
+                debugPrint("Error fetching docs \(err)")
+            } else {
+                for document in snapshot! .documents {
+                    let genreDisplay = Utilities.parseRecordToDisplayText(record: document.get("genre_record") as! String)
+                    self.genres.append(genreDisplay)
+                }
+                DispatchQueue.main.async {
+                    self.tableViewDropdown.reloadData()
+                }
+            }
+        }
+    }
+    
+    @IBAction func selectGenreTapped(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.tableViewDropdown.isHidden = !self.tableViewDropdown.isHidden
+            self.view.layoutIfNeeded()
+        })
     }
     
     //Allow for long press to add pin to map view
@@ -70,7 +130,7 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         
         locationMapView.mapType = MKMapType.standard
     }
-   
+    
     //recenters to user's location
     @IBAction func centerPressed(_ sender: Any) {
         locationMapView.userTrackingMode = .follow
@@ -220,8 +280,7 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     
     func clearPin(mode: Int) {
         if mode == CONFIRM {
-            let genre = genreInputField.text ?? "null_genre"
-            let confirm = UIAlertController(title: "Pin Created", message: "\(titleInputField.text!) was successfully added to your network \(Utilities.parseRecordToDisplayText(record: Utilities.parseInputToRecord(input: genre))).", preferredStyle: .alert)
+            let confirm = UIAlertController(title: "Pin Created", message: "\(titleInputField.text!) was successfully added to your network \(Utilities.parseRecordToDisplayText(record: Utilities.parseInputToRecord(input: selectedGenre))).", preferredStyle: .alert)
             confirm.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm"), style: .default, handler: { _ in
                 NSLog("Pin add confirmed, reset VC")
             }))
@@ -236,7 +295,6 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         }
         
         titleInputField.text = ""
-        genreInputField.text = ""
         subtitleTextField.text = ""
         
         imagePreview.image = nil
@@ -308,12 +366,10 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
             "uid" : uid!,
             "title" : titleInputField.text!,
             "subtitle" : subtitle,
-            "genre_record" : "null", //CHANGE THIS LATER TO BE GENRE RECORD
+            "genre_record" : selectedGenre,
             "longitude" : annotation[index].coordinate.longitude,
             "latitude" : annotation[index].coordinate.latitude
         ])
-        
-        
         
         if (imagePreview.image != nil ) {
             db.collection("spots").whereField("uid", isEqualTo: uid!)

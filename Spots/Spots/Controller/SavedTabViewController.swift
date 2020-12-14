@@ -14,7 +14,7 @@ import Firebase
 import FirebaseFirestore
 
 class SavedTabViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var spotTable: UITableView!
     
     @IBOutlet weak var genreLabel: UILabel!
@@ -25,64 +25,88 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var spotSubtitle: UILabel!
     
+    @IBOutlet weak var tableViewDropdown: UITableView!
+    @IBOutlet weak var selectGenre: UIButton!
+    
     let db = Firestore.firestore()
     let uid = Auth.auth().currentUser?.uid
     var genreKeys: [String] = []
     var spotsList:Dictionary<String,[Spot]> = [ : ]
-    //var list:Dictionary<String,[Spot]> = [ : ]
     var currentGenre = "all"
     var allArray: [Spot] = []
     let storage = Storage.storage().reference()
-    //var imageList:Dictionary<String,String> = [ : ]
     var imageList = [String: [String]]()
     var allImage: [String] = []
+    var switchColor = false
+    var backgroundColor: UIColor = UIColor.systemGray2
+    var genres: [String] = []
+    var selectedGenre = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createGenre()
-        //fetchSaved()
         spotTable.dataSource = self
         spotTable.delegate = self
-
-        //spotTable.register(spotCell.self, forCellReuseIdentifier: "spotCell")
-        
         spotTable.reloadData()
         
+        tableViewDropdown.dataSource = self
+        tableViewDropdown.delegate = self
+        tableViewDropdown.register(UITableViewCell.self, forCellReuseIdentifier: "tableCell")
+        tableViewDropdown.reloadData()
+        Utilities.styleTableView(tableViewDropdown)
     }
     
-    //override func viewWillAppear(_ animated: Bool) {
-
-        //super.viewWillAppear(animated)
-        
-    //}
-
-
+    override func viewWillAppear(_ animated: Bool) {
+        spotTable.reloadData()
+        tableViewDropdown.reloadData()
+        populateGenreTable()
+    }
     
-
-    func createGenre() {
-
-            self.db.collection("genres").whereField("uid", isEqualTo: self.uid!).getDocuments() { (snapshot, error) in
-                if let err = error {
-                    debugPrint("Error fetching docs \(err)")
-                } else {
-                    for document in snapshot! .documents{
-                        
-                        let genre = document.get("genre_record")
-                        self.genreKeys.append(genre as! String)
-                        self.spotsList[genre as! String] = []
-                        self.imageList[genre as! String] = []
-                        print(self.genreKeys)
-                        
-                    }
-                    self.fetchSaved()
+    func populateGenreTable() {
+        let uid = Auth.auth().currentUser?.uid
+        db.collection("genres").whereField("uid", isEqualTo: uid!).getDocuments() { (snapshot, error) in
+            if let err = error {
+                debugPrint("Error fetching docs \(err)")
+            } else {
+                for document in snapshot! .documents {
+                    let genreDisplay = Utilities.parseRecordToDisplayText(record: document.get("genre_record") as! String)
+                    self.genres.append(genreDisplay)
+                }
+                DispatchQueue.main.async {
+                    self.tableViewDropdown.reloadData()
                 }
             }
-        
         }
+    }
     
+    @IBAction func selectGenreTapped(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.tableViewDropdown.isHidden = !self.tableViewDropdown.isHidden
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func createGenre() {
+        self.db.collection("genres").whereField("uid", isEqualTo: self.uid!).getDocuments() { (snapshot, error) in
+            if let err = error {
+                debugPrint("Error fetching docs \(err)")
+            } else {
+                for document in snapshot! .documents{
+                    
+                    let genre = document.get("genre_record")
+                    self.genreKeys.append(genre as! String)
+                    self.spotsList[genre as! String] = []
+                    self.imageList[genre as! String] = []
+                    print(self.genreKeys)
+                    
+                }
+                self.fetchSaved()
+            }
+        }
+    }
     
     func fetchSaved() {
-            self.db.collection("spots").whereField("uid", isEqualTo: self.uid as Any).getDocuments(completion: { (snapshot, error) in
+        self.db.collection("spots").whereField("uid", isEqualTo: self.uid as Any).getDocuments(completion: { (snapshot, error) in
             if let err = error {
                 debugPrint("Error fetching docs \(err)")
             } else {
@@ -95,33 +119,26 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
                     let genre_record = document.get("genre_record") as? String ?? "null"
                     let addSpot = Spot(label: title , locationName: subtitle, genre_record: genre_record, coordinate: location)
                     self.spotsList[genre_record]?.append(addSpot)
-                    print("completed add",title)
+                    //print("completed add",title)
                     self.allArray.append(addSpot)
                     
-                    let docid = document.documentID
-                    self.storage.child("\(self.uid!)/\(docid).png").downloadURL(completion: {url, error in
-                                guard let url = url, error == nil else {
-                                    self.allImage.append("")
-                                    print("guard")
-                                    return
-                                }
-                        print("in here")
-                                let urlString = url.absoluteString
-                        self.imageList[genre_record]?.append(urlString)
-                        self.allImage.append(urlString)
-                })
+//                    print(self.allImage)
+//                    print(self.allArray)
                 }
-                print(self.spotsList)
-                print(self.allArray)
-                
+//                print(self.spotsList)
+//                print(self.allArray)
+//
                 DispatchQueue.main.async {
                     self.spotTable.reloadData()
                 }
             }
         })
     }
-     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == tableViewDropdown {
+            return genres.count
+        }
         if currentGenre == "all" {
             print(allArray.count)
             return allArray.count
@@ -129,55 +146,50 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
         else{
             return spotsList[currentGenre]!.count
         }
-                
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        //let spotCell = UITableViewCell(style: .subtitle, reuseIdentifier: "spotCell")
+        if tableView == tableViewDropdown {
+            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "tableCell")
+            cell.textLabel!.text = genres[indexPath.row]
+            return cell
+        }
         let spotCell = spotTable.dequeueReusableCell(withIdentifier: "spotCell") as! spotCell
         
-        spotCell.backgroundColor = UIColor.green
-        
-       // spotCell.textLabel!.text = spotsList["null"]?[indexPath.row].label
+        switchColor = !switchColor
+        if switchColor {
+            spotCell.backgroundColor = UIColor.systemGray4
+        } else {
+            spotCell.backgroundColor = UIColor.systemGray5
+        }
         
         spotCell.title?.text = self.allArray[indexPath.row].label
+        spotCell.title?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
         spotCell.subtitle?.text = self.allArray[indexPath.row].locationName
+        spotCell.subtitle?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
         
-        //let urlString = self.allImage[indexPath.row]
-        //let urlFinal = URL(string: urlString)
-        //let task = URLSession.shared.dataTask(with: urlFinal!, completionHandler: { data, _, error in
-        //guard let data = data, error == nil else { return }
-                        
-        //    DispatchQueue.main.async {
-        //        let image = UIImage(data: data)
-        //        spotCell.pic?.image = image
-        //    }
-        //})
-        //task.resume()
-        
-        
-        //spotCell.subtitle.text = self.allArray[indexPath.row].locationName
         return spotCell
     }
+  
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == tableViewDropdown {
+            let genre = genres[indexPath.row]
+            selectedGenre = Utilities.parseInputToRecord(input: genre)
+            UIView.animate(withDuration: 0.3, animations: {
+                self.tableViewDropdown.isHidden = !self.tableViewDropdown.isHidden
+                self.view.layoutIfNeeded()
+            })
+        }
+     }
     
 }
 
 class spotCell: UITableViewCell {
     
-    @IBOutlet var pic: UIImageView?
     @IBOutlet var subtitle: UILabel?
     @IBOutlet var title: UILabel?
     
 }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 

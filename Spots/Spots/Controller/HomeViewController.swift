@@ -73,11 +73,8 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
                         print("Error getting documents: \(err)")
                     } else {
                         for document in querySnapshot!.documents {
-                            //print("\(document.documentID) => \(document.data())")
                             self.userPins.append(document.data())
                         }
-                        print(self.userPins)
-                        print(self.userPins.count)
                         for index in 0 ..< self.userPins.count  {
                             
                             let annotation = MKPointAnnotation()

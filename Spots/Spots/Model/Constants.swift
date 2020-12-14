@@ -28,3 +28,8 @@ let connectors = [
     "with"
 ]
 
+
+enum genreColor  {
+    case pink, red, orange, gold, peach, blue, cyan, green, brown, black
+}
+

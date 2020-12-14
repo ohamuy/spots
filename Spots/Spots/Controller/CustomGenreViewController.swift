@@ -51,9 +51,8 @@ class CustomGenreViewController: UIViewController {
         let record = Utilities.parseInputToRecord(input: title)
         let description = descriptionInput.text ?? ""
         let colorString = Utilities.convertColorToHex(color: genreColor)
-        print("Genre record \(record)")
-        print("Genre desc \(description)")
-        print("Genre color string \(colorString)")
+        
+        
         
         // TODO: Firestore stuff
     }

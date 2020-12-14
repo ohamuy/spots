@@ -45,6 +45,8 @@ class CustomGenreViewController: UIViewController {
         Utilities.styleTextFieldAppContent(titleInput)
         Utilities.styleTextFieldAppContent(descriptionInput)
         Utilities.styleButton(noColorButton)
+        Utilities.styleButton(saveButton)
+        Utilities.styleButton(cancelButton)
     }
     
     func configureButtonColors() {

@@ -126,7 +126,7 @@ class Utilities {
         return colorInHex
     }
     
-    static func convertColorToHex(color: genreColor ) -> (UIColor, [String]) {
+    static func yieldGenreColor(color: genreColor ) -> (UIColor, [String]) {
         switch(color) {
             case .pink:
                 return (UIColor(red: 193, green: 112, blue: 184, alpha: 1.0), ["193", "112", "184"])

@@ -28,11 +28,17 @@ class CustomGenreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureButtonColors()
         // Do any additional setup after loading the view.
     }
     
+    func configureButtonColors() {
+//        colorButtonCollection[0] = Utilities.yieldGenreColor(color: genreColor.pink)
+//        colorButtonCollection[1] = Utilities.yieldGenreColor(color: genreColor.red)
+    }
     
+    
+    // Event handlers
     @IBAction func selectPink(_ sender: Any) {
     }
     
@@ -61,7 +67,6 @@ class CustomGenreViewController: UIViewController {
     @IBAction func selectBlack(_ sender: Any) {
     }
     
-    // Event handlers
     @IBAction func colorButtonTapped(_ sender: Any) {
         //        let colorPicker = UIColorPickerViewController()
         //        colorPicker.delegate = self

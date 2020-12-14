@@ -19,30 +19,45 @@ class CustomGenreViewController: UIViewController {
     var genreDescription: String?
     
     // Outlets
+    @IBOutlet weak var genreTitle: UILabel!
     @IBOutlet var titleInput: UITextField!
+    @IBOutlet weak var descriptionTitle: UILabel!
     @IBOutlet var descriptionInput: UITextField!
-    @IBOutlet var colorView: UIImageView!
+    @IBOutlet weak var colorTitle: UILabel!
     @IBOutlet var colorButtonCollection: [ColorButton]!
     
+    @IBOutlet weak var noColorButton: UIButton!
     
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureButtonColors()
         // Do any additional setup after loading the view.
+        setDefault()
+    }
+    
+    func setDefault() {
+        Utilities.styleLabel(genreTitle)
+        Utilities.styleLabel(descriptionTitle)
+        Utilities.styleLabel(colorTitle)
+        Utilities.styleTextFieldAppContent(titleInput)
+        Utilities.styleTextFieldAppContent(descriptionInput)
+        Utilities.styleButton(noColorButton)
     }
     
     func configureButtonColors() {
-        colorButtonCollection[0].backgroundColor = Utilities.yieldGenreColor(color: .pink).0
-        colorButtonCollection[1].backgroundColor = Utilities.yieldGenreColor(color: .red).0
-        colorButtonCollection[2].backgroundColor = Utilities.yieldGenreColor(color: .orange).0
-        colorButtonCollection[3].backgroundColor = Utilities.yieldGenreColor(color: .gold).0
-        colorButtonCollection[4].backgroundColor = Utilities.yieldGenreColor(color: .peach).0
-        colorButtonCollection[5].backgroundColor = Utilities.yieldGenreColor(color: .blue).0
-        colorButtonCollection[6].backgroundColor = Utilities.yieldGenreColor(color: .cyan).0
-        colorButtonCollection[7].backgroundColor = Utilities.yieldGenreColor(color: .green).0
-        colorButtonCollection[8].backgroundColor = Utilities.yieldGenreColor(color: .brown).0
-        colorButtonCollection[9].backgroundColor = Utilities.yieldGenreColor(color: .black).0
+//        colorButtonCollection[0].backgroundColor = Utilities.yieldGenreColor(color: .pink).0
+//        colorButtonCollection[1].backgroundColor = Utilities.yieldGenreColor(color: .red).0
+//        colorButtonCollection[2].backgroundColor = Utilities.yieldGenreColor(color: .orange).0
+//        colorButtonCollection[3].backgroundColor = Utilities.yieldGenreColor(color: .gold).0
+//        colorButtonCollection[4].backgroundColor = Utilities.yieldGenreColor(color: .peach).0
+//        colorButtonCollection[5].backgroundColor = Utilities.yieldGenreColor(color: .blue).0
+//        colorButtonCollection[6].backgroundColor = Utilities.yieldGenreColor(color: .cyan).0
+//        colorButtonCollection[7].backgroundColor = Utilities.yieldGenreColor(color: .green).0
+//        colorButtonCollection[8].backgroundColor = Utilities.yieldGenreColor(color: .brown).0
+//        colorButtonCollection[9].backgroundColor = Utilities.yieldGenreColor(color: .black).0
     }
     
     

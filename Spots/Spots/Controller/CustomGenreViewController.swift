@@ -33,8 +33,16 @@ class CustomGenreViewController: UIViewController {
     }
     
     func configureButtonColors() {
-//        colorButtonCollection[0] = Utilities.yieldGenreColor(color: genreColor.pink)
-//        colorButtonCollection[1] = Utilities.yieldGenreColor(color: genreColor.red)
+        colorButtonCollection[0].backgroundColor = Utilities.yieldGenreColor(color: .pink).0
+        colorButtonCollection[1].backgroundColor = Utilities.yieldGenreColor(color: .red).0
+        colorButtonCollection[2].backgroundColor = Utilities.yieldGenreColor(color: .orange).0
+        colorButtonCollection[3].backgroundColor = Utilities.yieldGenreColor(color: .gold).0
+        colorButtonCollection[4].backgroundColor = Utilities.yieldGenreColor(color: .peach).0
+        colorButtonCollection[5].backgroundColor = Utilities.yieldGenreColor(color: .blue).0
+        colorButtonCollection[6].backgroundColor = Utilities.yieldGenreColor(color: .cyan).0
+        colorButtonCollection[7].backgroundColor = Utilities.yieldGenreColor(color: .green).0
+        colorButtonCollection[8].backgroundColor = Utilities.yieldGenreColor(color: .brown).0
+        colorButtonCollection[9].backgroundColor = Utilities.yieldGenreColor(color: .black).0
     }
     
     

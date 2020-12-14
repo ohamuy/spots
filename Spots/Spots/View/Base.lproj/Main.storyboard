@@ -1200,7 +1200,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="subtitleTextFieldChanged:" destination="mej-D7-6PO" eventType="editingDidEnd" id="Kzg-yu-Ld6"/>
+                                            <action selector="subtitleTextFieldChanged:" destination="mej-D7-6PO" eventType="editingChanged" id="CWZ-oK-dKJ"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Genre" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WJp-29-C4x">

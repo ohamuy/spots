@@ -40,7 +40,7 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     let manager = CLLocationManager()
     let regionMeter: Double = 10000
     var genres: [String] = []
-    var selectedGenre = "null"
+    var selectedGenre = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()

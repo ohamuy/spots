@@ -48,6 +48,7 @@ class CustomGenreViewController: UIViewController, UITextFieldDelegate {
         Utilities.styleTextFieldAppContent(descriptionInput)
         Utilities.styleButton(noColorButton)
         Utilities.styleButton(saveButton)
+        Utilities.styleButton(cancelButton)
         noColorButton.layer.borderWidth = 3
         noColorButton.layer.borderColor = UIColor.clear.cgColor
     }
@@ -173,11 +174,7 @@ class CustomGenreViewController: UIViewController, UITextFieldDelegate {
             "uid" : uid!
         ])
         
-        let confirm = UIAlertController(title: "Genre Added", message: " \(Utilities.parseRecordToDisplayText(record: Utilities.parseInputToRecord(input: title))) was successfully added to your genre selection", preferredStyle: .alert)
-        confirm.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm"), style: .default, handler: { _ in
-            NSLog("Pin add confirmed, reset VC")
-        }))
-        self.present(confirm, animated: true, completion: nil)
+        
     }
     
     //Add functionality to cancel button

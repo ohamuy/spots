@@ -105,8 +105,6 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    
-    
     func fetchSaved() {
         self.db.collection("spots").whereField("uid", isEqualTo: self.uid as Any).getDocuments(completion: { (snapshot, error) in
             if let err = error {

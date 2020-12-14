@@ -28,10 +28,8 @@ class SpotInfoViewController: UIViewController{
     @IBOutlet var genreColor: ColorButton!
     
     override func viewDidLoad() {
-        print(clickedSpot)
         let coordinate = clickedSpot.coordinate
         let color = clickedSpot.genreColor
-        print("THE COLOR IS:",color)
         let theSpot = Spot(label: clickedSpot.label!, locationName: clickedSpot.locationName, genre_record: clickedSpot.genre_record, coordinate: coordinate, docid: clickedSpot.docid ?? "null", genreColor: color)
         mapView.addAnnotation(theSpot)
         loadImg()

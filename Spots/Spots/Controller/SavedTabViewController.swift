@@ -111,18 +111,16 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
                     
                     let genre = document.get("genre_record") as! String
                   
-                    let rgbArray = document.get("color") as! [String]
-                    let red = Utilities.cgfloatConvert(input: rgbArray[0])
-                    let green = Utilities.cgfloatConvert(input: rgbArray[1])
-                    let blue = Utilities.cgfloatConvert(input: rgbArray[2])
+                    let rgbArray = document.get("color") as? [String]
+                    let red = Utilities.cgfloatConvert(input: rgbArray?[0] ?? "0")
+                    let green = Utilities.cgfloatConvert(input: rgbArray?[1] ?? "0")
+                    let blue = Utilities.cgfloatConvert(input: rgbArray?[2] ?? "0")
                     let theColor = UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1.0)
                     self.colorsDict[genre] = theColor
-                    print (rgbArray)
                    
-                    self.genreKeys.append(genre as! String)
-                    self.spotsList[genre as! String] = []
-                    self.imageList[genre as! String] = []
-                    //                    print(self.genreKeys)
+                    self.genreKeys.append(genre)
+                    self.spotsList[genre] = []
+                    self.imageList[genre] = []
                     
                 }
                 self.fetchSaved()

@@ -160,7 +160,7 @@ class Utilities {
     
     static func cgfloatConvert(input: String)-> CGFloat {
         let intcast = NumberFormatter().number(from: input)
-        let makeCgf = CGFloat(intcast!)
+        let makeCgf = CGFloat(truncating: intcast!)
         return makeCgf
     }
 }

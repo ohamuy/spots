@@ -904,22 +904,6 @@
             </objects>
             <point key="canvasLocation" x="-762" y="838"/>
         </scene>
-        <!--Test View Controller-->
-        <scene sceneID="PJR-zD-dm9">
-            <objects>
-                <viewController id="WXq-wK-fhk" customClass="TestViewController" customModule="Spots" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="svL-8D-Ecf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="cfH-Sw-1ey"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="cGp-xH-6hN"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I9v-S6-TlK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="888.79999999999995" y="2256.6502463054189"/>
-        </scene>
         <!--Spot Info View Controller-->
         <scene sceneID="Cj8-7g-uao">
             <objects>

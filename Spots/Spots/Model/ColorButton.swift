@@ -21,4 +21,9 @@ class ColorButton: UIButton {
         layer.borderWidth = 3.0
         layer.borderColor = UIColor.clear.cgColor
     }
+    
+    func changeColor(color: UIColor) {
+        let theColor = color.cgColor
+        layer.backgroundColor = theColor
+    }
 }

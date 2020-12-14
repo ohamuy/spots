@@ -22,6 +22,9 @@ class CustomGenreViewController: UIViewController {
     @IBOutlet var titleInput: UITextField!
     @IBOutlet var descriptionInput: UITextField!
     @IBOutlet var colorView: UIImageView!
+    @IBOutlet var colorButtonCollection: [ColorButton]!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,34 @@ class CustomGenreViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    @IBAction func selectPink(_ sender: Any) {
+    }
+    
+    @IBAction func selectRed(_ sender: Any) {
+    }
+    
+    @IBAction func selectOrange(_ sender: Any) {
+    }
+    
+    @IBAction func selectGold(_ sender: Any) {
+    }
+    
+    
+    @IBAction func selectPeach(_ sender: Any) {
+    }
+    
+    @IBAction func selectBlue(_ sender: Any) {
+    }
+    
+    @IBAction func selectCyan(_ sender: Any) {
+    }
+    @IBAction func selectGreen(_ sender: Any) {
+    }
+    @IBAction func selectBrown(_ sender: Any) {
+    }
+    @IBAction func selectBlack(_ sender: Any) {
+    }
     
     // Event handlers
     @IBAction func colorButtonTapped(_ sender: Any) {

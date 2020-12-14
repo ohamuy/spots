@@ -93,8 +93,8 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
                     let lat = document.data()["latitude"] as! CLLocationDegrees
                     let long = document.data()["longitude"] as! CLLocationDegrees
                     let location = CLLocationCoordinate2DMake(lat , long )
-                    let addSpot = Spot(label: title , locationName: subtitle, category: 0, coordinate: location)
-                    self.spotsList[genre]!.append(addSpot)
+                    //let addSpot = Spot(label: title , locationName: subtitle, category: 0, coordinate: location)
+                    //self.spotsList[genre]!.append(addSpot)
                     //                    self.spotsArray.append(addSpot)
                    // var list = self.spotsList[genre]!
                     print("completed add",title)

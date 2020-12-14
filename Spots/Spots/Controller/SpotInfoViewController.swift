@@ -24,7 +24,7 @@ class SpotInfoViewController: UIViewController{
     override func viewDidLoad() {
         let latitude = clickedSpot.coordinate.latitude
         let longitude = clickedSpot.coordinate.longitude
-        let theSpot = Spot(label: clickedSpot.label!, locationName: clickedSpot.locationName, category: clickedSpot.category, coordinate: CLLocationCoordinate2DMake(latitude, longitude))
+        let theSpot = Spot(label: clickedSpot.label!, locationName: clickedSpot.locationName, genre_record: clickedSpot.genre_record, coordinate: CLLocationCoordinate2DMake(latitude, longitude))
         mapView.addAnnotation(theSpot)
         loadImg()
         spotTitle.text = clickedSpot.label

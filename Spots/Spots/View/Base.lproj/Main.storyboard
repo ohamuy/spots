@@ -376,7 +376,7 @@
         <!--Saved Spots-->
         <scene sceneID="k6s-Kc-QQM">
             <objects>
-                <viewController id="WJ8-af-s63" customClass="SavedSpotsViewController" customModule="Spots" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WJ8-af-s63" customClass="SavedTabViewController" customModule="Spots" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="skh-8L-e2T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -458,7 +458,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Saved Spots" id="sXy-f4-ntJ"/>
                     <connections>
-                        <outlet property="spotsTable" destination="AZ8-lu-aRd" id="85E-dv-xRF"/>
+                        <outlet property="spotTable" destination="AZ8-lu-aRd" id="CXq-2N-9Es"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZo-Zk-IDx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

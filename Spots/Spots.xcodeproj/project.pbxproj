@@ -16,6 +16,7 @@
 		8824DC032571A39E003D44BB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC022571A39E003D44BB /* SignUpViewController.swift */; };
 		8824DC052571A3B4003D44BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC042571A3B4003D44BB /* LoginViewController.swift */; };
 		8824DC072571A3EC003D44BB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824DC062571A3EC003D44BB /* HomeViewController.swift */; };
+		882EC0CA2587091200470E93 /* SavedTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882EC0C92587091200470E93 /* SavedTabViewController.swift */; };
 		889C34A52572E78A000183E5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C34A42572E78A000183E5 /* Utilities.swift */; };
 		88A2931C25819BA300D78E91 /* CustomPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2931B25819BA300D78E91 /* CustomPinViewController.swift */; };
 		88A8F992257439DA00099966 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8F991257439DA00099966 /* ProfileViewController.swift */; };
@@ -46,6 +47,7 @@
 		8824DC022571A39E003D44BB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8824DC042571A3B4003D44BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8824DC062571A3EC003D44BB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		882EC0C92587091200470E93 /* SavedTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTabViewController.swift; sourceTree = "<group>"; };
 		889C34A42572E78A000183E5 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		88A2931B25819BA300D78E91 /* CustomPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPinViewController.swift; sourceTree = "<group>"; };
 		88A8F991257439DA00099966 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				133860FF257F7E9900D11441 /* SpotInfoViewController.swift */,
 				88A2931B25819BA300D78E91 /* CustomPinViewController.swift */,
 				BDAEAA77258475D800D540B3 /* CustomGenreViewController.swift */,
+				882EC0C92587091200470E93 /* SavedTabViewController.swift */,
 				0902B0D0258574E000C1D8CB /* NewPinViewController.swift */,
 			);
 			path = Controller;
@@ -295,6 +298,7 @@
 				8824DC032571A39E003D44BB /* SignUpViewController.swift in Sources */,
 				8824DC052571A3B4003D44BB /* LoginViewController.swift in Sources */,
 				0902B0D325866D2600C1D8CB /* APIStructs.swift in Sources */,
+				882EC0CA2587091200470E93 /* SavedTabViewController.swift in Sources */,
 				BDAEAA78258475D800D540B3 /* CustomGenreViewController.swift in Sources */,
 				88A8F99425744EAB00099966 /* PasswordViewController.swift in Sources */,
 				133C8B682585834800261002 /* SpotsTableViewCell.swift in Sources */,

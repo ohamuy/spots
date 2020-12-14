@@ -173,12 +173,12 @@ class CustomGenreViewController: UIViewController, UITextFieldDelegate {
             "description" : desc,
             "uid" : uid!
         ])
-        
+        self.navigationController?.popViewController(animated: true)
         
     }
     
     //Add functionality to cancel button
     @IBAction func cancelButtonTapped(_ sender: Any) {
-
+        self.navigationController?.popViewController(animated: true)
     }
 }

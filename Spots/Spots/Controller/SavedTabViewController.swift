@@ -40,11 +40,13 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
     var switchColor = false
     var backgroundColor: UIColor = UIColor.systemGray2
     var genres: [String] = []
-    var selectedGenre = ""
+    var selectedGenre = "null"
+    var colorsDict:Dictionary<String,UIColor> = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createGenre()
+//        createGenre()
+//        populateGenreTable()
         spotTable.dataSource = self
         spotTable.delegate = self
         spotTable.reloadData()
@@ -55,11 +57,24 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
         tableViewDropdown.reloadData()
         Utilities.styleTableView(tableViewDropdown)
     }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        genres = []
+//        allArray = []
+//        genreKeys = []
+//        spotsList = [:]
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
+        genres = []
+        allArray = []
+        genreKeys = []
+        spotsList = [:]
+        selectedGenre = "null"
+        createGenre()
+        populateGenreTable()
         spotTable.reloadData()
         tableViewDropdown.reloadData()
-        populateGenreTable()
+
     }
     
     func populateGenreTable() {
@@ -77,6 +92,7 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }
+        spotTable.reloadData()
     }
     
     @IBAction func selectGenreTapped(_ sender: Any) {
@@ -93,11 +109,20 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
             } else {
                 for document in snapshot! .documents{
                     
-                    let genre = document.get("genre_record")
+                    let genre = document.get("genre_record") as! String
+                  
+                    let rgbArray = document.get("color") as! [String]
+                    let red = Utilities.cgfloatConvert(input: rgbArray[0])
+                    let green = Utilities.cgfloatConvert(input: rgbArray[1])
+                    let blue = Utilities.cgfloatConvert(input: rgbArray[2])
+                    let theColor = UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1.0)
+                    self.colorsDict[genre] = theColor
+                    print (rgbArray)
+                   
                     self.genreKeys.append(genre as! String)
                     self.spotsList[genre as! String] = []
                     self.imageList[genre as! String] = []
-                    print(self.genreKeys)
+                    //                    print(self.genreKeys)
                     
                 }
                 self.fetchSaved()
@@ -117,17 +142,19 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
                     let long = document.get("longitude") as! CLLocationDegrees
                     let location = CLLocationCoordinate2DMake(lat , long )
                     let genre_record = document.get("genre_record") as? String ?? "null"
-                    let addSpot = Spot(label: title , locationName: subtitle, genre_record: genre_record, coordinate: location)
+                    let docid = document.documentID
+                    let color = self.colorsDict[genre_record]
+                    let addSpot = Spot(label: title , locationName: subtitle, genre_record: genre_record, coordinate: location, docid: docid, genreColor: color!)
                     self.spotsList[genre_record]?.append(addSpot)
                     //print("completed add",title)
                     self.allArray.append(addSpot)
                     
-//                    print(self.allImage)
-//                    print(self.allArray)
+                    //                    print(self.allImage)
+                    //                    print(self.allArray)
                 }
-//                print(self.spotsList)
-//                print(self.allArray)
-//
+                //                print(self.spotsList)
+                //                print(self.allArray)
+                //
                 DispatchQueue.main.async {
                     self.spotTable.reloadData()
                 }
@@ -139,39 +166,53 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
         if tableView == tableViewDropdown {
             return genres.count
         }
-        if currentGenre == "all" {
+        if selectedGenre == "null" {
             print(allArray.count)
             return allArray.count
         }
         else{
-            return spotsList[currentGenre]!.count
+
+            return spotsList[selectedGenre]!.count
         }
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == tableViewDropdown {
+        if tableView == spotTable {
+            let spotCell = spotTable.dequeueReusableCell(withIdentifier: "spotCell") as! spotCell
+            
+            switchColor = !switchColor
+            if switchColor {
+                spotCell.backgroundColor = UIColor.systemGray4
+            } else {
+                spotCell.backgroundColor = UIColor.systemGray5
+            }
+            
+            if selectedGenre == "null" {
+                spotCell.title?.text = self.allArray[indexPath.row].label
+                spotCell.title?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+                spotCell.subtitle?.text = self.allArray[indexPath.row].locationName
+                spotCell.subtitle?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+            }
+            else{
+                print("in else of tableview")
+                spotCell.title?.text = self.spotsList[selectedGenre]?[indexPath.row].label
+                spotCell.title?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+                spotCell.subtitle?.text = self.spotsList[selectedGenre]?[indexPath.row].locationName
+                spotCell.subtitle?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+            }
+            return spotCell
+        }
+        else {
             let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "tableCell")
             cell.textLabel!.text = genres[indexPath.row]
             return cell
         }
-        let spotCell = spotTable.dequeueReusableCell(withIdentifier: "spotCell") as! spotCell
-        
-        switchColor = !switchColor
-        if switchColor {
-            spotCell.backgroundColor = UIColor.systemGray4
-        } else {
-            spotCell.backgroundColor = UIColor.systemGray5
-        }
-        
-        spotCell.title?.text = self.allArray[indexPath.row].label
-        spotCell.title?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
-        spotCell.subtitle?.text = self.allArray[indexPath.row].locationName
-        spotCell.subtitle?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
-        
-        return spotCell
+        //        return
     }
-  
+    
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == tableViewDropdown {
             let genre = genres[indexPath.row]
@@ -180,8 +221,23 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.tableViewDropdown.isHidden = !self.tableViewDropdown.isHidden
                 self.view.layoutIfNeeded()
             })
+            self.spotTable.reloadData()
         }
-     }
+        if tableView == spotTable{
+            let spotInfoVC = storyboard!.instantiateViewController(identifier: "spotInfo") as SpotInfoViewController
+            if selectedGenre == "null" {
+                print(allArray)
+                spotInfoVC.clickedSpot = self.allArray[indexPath.row]
+            } else {
+                print("selected is ",selectedGenre)
+                spotInfoVC.clickedSpot = spotsList[selectedGenre]![indexPath.row]
+            }
+            navigationController?.pushViewController(spotInfoVC, animated: true)
+        }
+        
+    }
+    
+    
     
 }
 

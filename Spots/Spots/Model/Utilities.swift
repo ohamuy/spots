@@ -157,4 +157,10 @@ class Utilities {
                 return (UIColor(red: 51, green: 51, blue: 51, alpha: 1.0), ["51", "51", "51"])
         }
     }
+    
+    static func cgfloatConvert(input: String)-> CGFloat {
+        let intcast = NumberFormatter().number(from: input)
+        let makeCgf = CGFloat(intcast!)
+        return makeCgf
+    }
 }

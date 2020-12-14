@@ -18,39 +18,87 @@ class SpotInfoViewController: UIViewController{
     @IBOutlet var spotImg: UIImageView!
     @IBOutlet var spotTitle: UILabel!
     @IBOutlet var spotSubtitle: UILabel!
+    var genreCol: UIColor!
     var clickedSpot: Spot!
     let storage = Storage.storage().reference()
+    let db = Firestore.firestore()
+    let uid = Auth.auth().currentUser?.uid
+    
+    //    let storage = Storage.storage(url: "gs://spots-45e6f.appspot.com")
+    @IBOutlet var genreColor: ColorButton!
     
     override func viewDidLoad() {
-        let latitude = clickedSpot.coordinate.latitude
-        let longitude = clickedSpot.coordinate.longitude
-        let theSpot = Spot(label: clickedSpot.label!, locationName: clickedSpot.locationName, genre_record: clickedSpot.genre_record, coordinate: CLLocationCoordinate2DMake(latitude, longitude))
+        print(clickedSpot)
+        let coordinate = clickedSpot.coordinate
+        let color = clickedSpot.genreColor
+        print("THE COLOR IS:",color)
+        let theSpot = Spot(label: clickedSpot.label!, locationName: clickedSpot.locationName, genre_record: clickedSpot.genre_record, coordinate: coordinate, docid: clickedSpot.docid ?? "null", genreColor: color)
         mapView.addAnnotation(theSpot)
         loadImg()
         spotTitle.text = clickedSpot.label
         spotSubtitle.text = clickedSpot.locationName
+        Utilities.styleButton(backButton)
+        
+        genreColor.backgroundColor = color
+        genreColor.layer.cornerRadius = 15.0
+        genreColor.tintColor = color
+        genreColor.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+
+//        genreColor.backgroundColor =
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        let blank = UIImage()
+        blank.withTintColor(UIColor.black)
+        spotImg.image = blank
+    }
+    
+    @IBOutlet var backButton: UIButton!
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        // center the mapView on the selected pin
+        let region = MKCoordinateRegion(center: clickedSpot.coordinate, span: mapView.region.span)
+        mapView.setRegion(region, animated: true)
     }
     func loadImg(){
-        storage.child("images/file.png").downloadURL(completion: {url, error in
-        guard let url = url, error == nil else {
-        return
-        }
-
-        let urlString = url.absoluteString
-        print("url \(urlString)")
-        let urlFinal = URL(string: urlString)
-        let task = URLSession.shared.dataTask(with: urlFinal!, completionHandler: { data, _, error in
-        guard let data = data, error == nil else {
-        return
-        }
-
-        DispatchQueue.main.async {
-        let image = UIImage(data: data)
-        self.spotImg.image = image
-        }
+//        print("in load image")
+        let docid = clickedSpot.docid!
+//        print("\(uid!)/\(docid).png")
+//        storage.child("\(uid!)/\(docid).png").getData(maxSize: 1*1024*1024) { (imagedata, error) in
+//            if let error = error {
+//                print(error)
+//                return
+//            } else {
+//                if let imgd = imagedata {
+//                    self.spotImg.image = UIImage(data: imgd)
+//                }
+//            }
+//
+//        }
+//        self.spotImg.image = downloaded 
+        storage.child("\(uid!)/\(docid).png").downloadURL(completion: {url, error in
+            guard let url = url, error == nil else {
+                print("in guard")
+                return
+            }
+            let urlString = url.absoluteString
+            print("THE URL: \(urlString)")
+            let urlFinal = URL(string: urlString)
+            let task = URLSession.shared.dataTask(with: urlFinal!, completionHandler: { data, _, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    let image = UIImage(data: data)
+                    self.spotImg.image = image
+                }
+            })
+            task.resume()
         })
-        task.resume()
-        })
+    }
+    @IBAction func back(_ sender: Any) {
+//        SavedTabViewController.createGenre(self.presentedViewController as! SavedTabViewController)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

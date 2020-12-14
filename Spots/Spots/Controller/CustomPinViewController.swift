@@ -70,6 +70,11 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         
         locationMapView.mapType = MKMapType.standard
     }
+   
+    //recenters to user's location
+    @IBAction func centerPressed(_ sender: Any) {
+        locationMapView.userTrackingMode = .follow
+    }
     
     //Adds a pin when a long press is recongized
     //learned here: https://www.youtube.com/watch?v=Kfw9XCO6VGY

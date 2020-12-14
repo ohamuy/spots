@@ -66,6 +66,11 @@ class NewPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerCo
             }
         }
     }
+
+    @IBAction func centerPressed(_ sender: Any) {
+        locationMapView.userTrackingMode = .follow
+
+    }
     
     //Add styling to all labels, buttons and fields
     func setDefault () {
@@ -298,8 +303,6 @@ class NewPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerCo
             "longitude" : annotation[index].coordinate.longitude,
             "latitude" : annotation[index].coordinate.latitude
         ])
-        
-        
         
         
         if (imagePreview.image != nil ) {

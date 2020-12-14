@@ -326,6 +326,16 @@
                                     <action selector="resetDataButtonTapped:" destination="aMF-5P-H2e" eventType="touchUpInside" id="Jma-NQ-toI"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUp-Xr-wQQ">
+                                <rect key="frame" x="177" y="339" width="21" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.14509803921568626" green="0.54509803921568623" blue="0.56470588235294117" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="location.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="centerLocationTapped:" destination="AsV-xO-wNf" eventType="touchUpInside" id="d4O-hx-5p1"/>
+                                    <action selector="centerPressed:" destination="aMF-5P-H2e" eventType="touchUpInside" id="hgY-tC-ums"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -712,6 +722,15 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUv-Gn-XyJ">
+                                <rect key="frame" x="178" y="688" width="21" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.1450980392" green="0.5450980392" blue="0.56470588239999997" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="location.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="centerLocationTapped:" destination="AsV-xO-wNf" eventType="touchUpInside" id="Dcj-dv-3Oe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="EyX-JH-MlL"/>
@@ -1291,6 +1310,16 @@
                                     <action selector="resetDataButtonTapped:" destination="mej-D7-6PO" eventType="touchUpInside" id="7b2-sQ-kYI"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQo-49-cPf">
+                                <rect key="frame" x="177" y="395" width="21" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.1450980392" green="0.5450980392" blue="0.56470588239999997" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="location.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="centerLocationTapped:" destination="AsV-xO-wNf" eventType="touchUpInside" id="3TP-ER-HJz"/>
+                                    <action selector="centerPressed:" destination="mej-D7-6PO" eventType="touchUpInside" id="FN4-OL-Jdg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -1347,6 +1376,7 @@
         <image name="ProfileEmpty" width="1046" height="1046"/>
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="house" catalog="system" width="128" height="110"/>
+        <image name="location.fill" catalog="system" width="128" height="115"/>
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <image name="square.and.pencil" catalog="system" width="128" height="118"/>
         <image name="trash.circle" catalog="system" width="128" height="121"/>

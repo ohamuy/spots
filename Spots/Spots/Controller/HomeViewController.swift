@@ -57,6 +57,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
         manager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
+    @IBAction func centerLocationTapped(_ sender: Any) {
+        locationMapView.userTrackingMode = .follow
+    }
+    
     //populates map with spots from firestore
     func updateMap() {
         if Auth.auth().currentUser != nil{

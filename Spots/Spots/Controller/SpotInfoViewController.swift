@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import FirebaseStorage
 import Firebase
+import FirebaseUI
 
 class SpotInfoViewController: UIViewController{
     
@@ -63,42 +64,22 @@ class SpotInfoViewController: UIViewController{
         let region = MKCoordinateRegion(center: clickedSpot.coordinate, span: mapView.region.span)
         mapView.setRegion(region, animated: true)
     }
-    func loadImg(){
-//        print("in load image")
+    
+    func loadImg() {
         let docid = clickedSpot.docid!
-        print("\(uid!)/\(docid).png")
-//        storage.child("\(uid!)/\(docid).png").getData(maxSize: 1*1024*1024) { (imagedata, error) in
-//            if let error = error {
-//                print(error)
-//                return
-//            } else {
-//                if let imgd = imagedata {
-//                    self.spotImg.image = UIImage(data: imgd)
-//                }
-//            }
-//
-//        }
-//        self.spotImg.image = downloaded 
-//        storage.child("\(uid!)/\(docid).png").downloadURL(completion: {url, error in
-//            guard let url = url, error == nil else {
-//                print("in guard")
-//                return
-//            }
-//            let urlString = url.absoluteString
-//            print("THE URL: \(urlString)")
-//            let urlFinal = URL(string: urlString)
-//            let task = URLSession.shared.dataTask(with: urlFinal!, completionHandler: { data, _, error in
-//                guard let data = data, error == nil else {
-//                    return
-//                }
-//                DispatchQueue.main.async {
-//                    let image = UIImage(data: data)
-//                    self.spotImg.image = image
-//                }
-//            })
-//            task.resume()
-//        })
+        // Reference to an image file in Firebase Storage
+        let reference = storage.child("\(uid!)/\(docid).png")
+
+        // UIImageView in your ViewController
+        let spotImg: UIImageView = self.spotImg
+
+        // Placeholder image
+        let placeholderImage = UIImage(named: "placeholder.jpg")
+
+        // Load the image using SDWebImage
+        spotImg.sd_setImage(with: reference, placeholderImage: placeholderImage)
     }
+    
     @IBAction func back(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

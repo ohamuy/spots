@@ -9,6 +9,7 @@ target 'Spots' do
   use_frameworks!
 
   # Pods for Spots
+  pod 'FirebaseUI/Storage'
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'

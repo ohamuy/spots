@@ -15,6 +15,7 @@ class CustomGenreViewController: UIViewController {
     
     // Model variables
     var genreColor: UIColor?
+    var genreColorRGB: [String]?
     var recordId: String?
     var genreDescription: String?
     
@@ -45,8 +46,6 @@ class CustomGenreViewController: UIViewController {
         Utilities.styleTextFieldAppContent(titleInput)
         Utilities.styleTextFieldAppContent(descriptionInput)
         Utilities.styleButton(noColorButton)
-        Utilities.styleButton(saveButton)
-        Utilities.styleButton(cancelButton)
     }
     
     func configureButtonColors() {
@@ -65,31 +64,80 @@ class CustomGenreViewController: UIViewController {
     
     // Event handlers
     @IBAction func selectPink(_ sender: Any) {
+        for color in colorButtonCollection {
+            color.layer.borderColor = UIColor.clear.cgColor
+        }
+        colorButtonCollection[0].layer.borderColor = UIColor.gray.cgColor
+        genreColorRGB =  ["193", "112", "184"]
     }
     
     @IBAction func selectRed(_ sender: Any) {
+        for color in colorButtonCollection {
+            color.layer.borderColor = UIColor.clear.cgColor
+        }
+        colorButtonCollection[1].layer.borderColor = UIColor.gray.cgColor
+        genreColorRGB =  ["255", "59", "0"]
     }
     
     @IBAction func selectOrange(_ sender: Any) {
+        for color in colorButtonCollection {
+            color.layer.borderColor = UIColor.clear.cgColor
+        }
+        colorButtonCollection[2].layer.borderColor = UIColor.gray.cgColor
+        genreColorRGB =  ["245", "145", "5"]
     }
     
     @IBAction func selectGold(_ sender: Any) {
+        for color in colorButtonCollection {
+            color.layer.borderColor = UIColor.clear.cgColor
+        }
+        colorButtonCollection[3].layer.borderColor = UIColor.gray.cgColor
+        genreColorRGB =  ["245", "145", "5"]
     }
     
-    
     @IBAction func selectPeach(_ sender: Any) {
+        for color in colorButtonCollection {
+            color.layer.borderColor = UIColor.clear.cgColor
+        }
+        colorButtonCollection[4].layer.borderColor = UIColor.gray.cgColor
+        genreColorRGB = ["249", "127", "80"]
     }
     
     @IBAction func selectBlue(_ sender: Any) {
+        for color in colorButtonCollection {
+            color.layer.borderColor = UIColor.clear.cgColor
+        }
+        colorButtonCollection[5].layer.borderColor = UIColor.gray.cgColor
+        genreColorRGB = ["10", "49", "121"]
     }
     
     @IBAction func selectCyan(_ sender: Any) {
+        for color in colorButtonCollection {
+            color.layer.borderColor = UIColor.clear.cgColor
+        }
+        colorButtonCollection[6].layer.borderColor = UIColor.gray.cgColor
+        genreColorRGB = ["0", "175", "225"]
     }
     @IBAction func selectGreen(_ sender: Any) {
+        for color in colorButtonCollection {
+            color.layer.borderColor = UIColor.clear.cgColor
+        }
+        colorButtonCollection[7].layer.borderColor = UIColor.gray.cgColor
+        genreColorRGB = ["93", "171", "29"]
     }
     @IBAction func selectBrown(_ sender: Any) {
+        for color in colorButtonCollection {
+            color.layer.borderColor = UIColor.clear.cgColor
+        }
+        colorButtonCollection[8].layer.borderColor = UIColor.gray.cgColor
+        genreColorRGB = ["114", "80", "51"]
     }
     @IBAction func selectBlack(_ sender: Any) {
+        for color in colorButtonCollection {
+            color.layer.borderColor = UIColor.clear.cgColor
+        }
+        colorButtonCollection[8].layer.borderColor = UIColor.gray.cgColor
+        genreColorRGB = ["51", "51", "51"]
     }
     
     @IBAction func colorButtonTapped(_ sender: Any) {
@@ -108,12 +156,7 @@ class CustomGenreViewController: UIViewController {
             self.present(noTitleErrorMsg, animated: true, completion: nil)
             return
         }
-        
-        let record = Utilities.parseInputToRecord(input: title)
-        let description = descriptionInput.text ?? ""
-        let colorString = Utilities.convertColorToHex(color: genreColor)
-        
-        
+      
         
         // TODO: Firestore stuff
     }

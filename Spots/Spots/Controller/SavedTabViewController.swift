@@ -69,6 +69,7 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
         allArray = []
         genreKeys = []
         spotsList = [:]
+        selectedGenre = "null"
         createGenre()
         populateGenreTable()
         spotTable.reloadData()

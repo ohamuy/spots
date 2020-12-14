@@ -398,7 +398,7 @@
                                     <constraint firstAttribute="height" constant="621" id="vRm-Ts-icB"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="spotCell" rowHeight="82" id="YK2-9z-vQl" customClass="SpotsTableViewCell" customModule="Spots" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="spotCell" rowHeight="82" id="YK2-9z-vQl" customClass="spotCell" customModule="Spots" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YK2-9z-vQl" id="cdx-PX-nW9">
@@ -408,27 +408,33 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XxF-1f-q6C">
                                                     <rect key="frame" x="0.0" y="0.0" width="82" height="82"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyG-Jw-rp8">
-                                                    <rect key="frame" x="90" y="36" width="276.66666666666669" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyG-Jw-rp8">
+                                                    <rect key="frame" x="90" y="25" width="276.66666666666669" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHp-iV-L4N">
-                                                    <rect key="frame" x="90" y="11" width="276.66666666666669" height="24"/>
+                                                    <rect key="frame" x="90" y="11" width="276.66666666666669" height="13"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="XxF-1f-q6C" firstAttribute="leading" secondItem="cdx-PX-nW9" secondAttribute="leading" id="2Cy-cb-jbe"/>
                                                 <constraint firstItem="qHp-iV-L4N" firstAttribute="width" secondItem="cdx-PX-nW9" secondAttribute="width" multiplier="0.737609" id="2L6-yi-P3F"/>
+                                                <constraint firstItem="DyG-Jw-rp8" firstAttribute="top" secondItem="qHp-iV-L4N" secondAttribute="bottom" constant="1" id="4e4-bb-FHo"/>
                                                 <constraint firstItem="qHp-iV-L4N" firstAttribute="top" secondItem="cdx-PX-nW9" secondAttribute="top" constant="11" id="4nB-hb-5VH"/>
                                                 <constraint firstAttribute="trailing" secondItem="qHp-iV-L4N" secondAttribute="trailing" constant="8.3333333333333144" id="BKw-MH-Ozv"/>
+                                                <constraint firstItem="DyG-Jw-rp8" firstAttribute="leading" secondItem="XxF-1f-q6C" secondAttribute="trailing" constant="8" id="CYs-vc-uyh"/>
+                                                <constraint firstItem="qHp-iV-L4N" firstAttribute="leading" secondItem="XxF-1f-q6C" secondAttribute="trailing" constant="8" id="Cp1-Ww-U7s"/>
+                                                <constraint firstItem="XxF-1f-q6C" firstAttribute="top" secondItem="cdx-PX-nW9" secondAttribute="topMargin" id="EP8-OX-rev"/>
                                                 <constraint firstAttribute="trailing" secondItem="DyG-Jw-rp8" secondAttribute="trailing" constant="8.3333333333333144" id="US1-QE-3s3"/>
+                                                <constraint firstItem="qHp-iV-L4N" firstAttribute="top" secondItem="cdx-PX-nW9" secondAttribute="topMargin" id="VXp-zy-b6I"/>
                                                 <constraint firstItem="DyG-Jw-rp8" firstAttribute="width" secondItem="cdx-PX-nW9" secondAttribute="width" multiplier="0.737609" id="awp-ji-0UX"/>
-                                                <constraint firstItem="DyG-Jw-rp8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XxF-1f-q6C" secondAttribute="trailing" symbolic="YES" id="hGr-xV-Cdb"/>
+                                                <constraint firstItem="DyG-Jw-rp8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XxF-1f-q6C" secondAttribute="trailing" constant="8" symbolic="YES" id="hGr-xV-Cdb"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="DyG-Jw-rp8" secondAttribute="bottom" constant="22" id="hdZ-6l-Zak"/>
+                                                <constraint firstItem="DyG-Jw-rp8" firstAttribute="leading" secondItem="XxF-1f-q6C" secondAttribute="trailing" constant="8" id="hwc-vF-uPf"/>
                                                 <constraint firstItem="DyG-Jw-rp8" firstAttribute="top" secondItem="qHp-iV-L4N" secondAttribute="bottom" constant="1" id="pEG-63-VDJ"/>
                                                 <constraint firstItem="XxF-1f-q6C" firstAttribute="height" secondItem="cdx-PX-nW9" secondAttribute="height" id="u26-MP-xJS"/>
                                                 <constraint firstItem="XxF-1f-q6C" firstAttribute="width" secondItem="cdx-PX-nW9" secondAttribute="height" multiplier="1:1" id="xPi-Qi-62l"/>
@@ -439,9 +445,9 @@
                                             <constraint firstItem="XxF-1f-q6C" firstAttribute="centerY" secondItem="YK2-9z-vQl" secondAttribute="centerY" id="WCx-Uh-wOS"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="spotImage" destination="XxF-1f-q6C" id="BaH-hT-hHJ"/>
-                                            <outlet property="spotSubtitle" destination="DyG-Jw-rp8" id="3oM-dt-Wyw"/>
-                                            <outlet property="spotTitle" destination="qHp-iV-L4N" id="D9d-4a-TT0"/>
+                                            <outlet property="pic" destination="XxF-1f-q6C" id="Cjw-5g-f59"/>
+                                            <outlet property="subtitle" destination="DyG-Jw-rp8" id="xSA-d6-49L"/>
+                                            <outlet property="title" destination="qHp-iV-L4N" id="NWm-Ph-WIP"/>
                                             <segue destination="IEf-jT-YUu" kind="show" id="SV8-zq-5ky"/>
                                         </connections>
                                     </tableViewCell>

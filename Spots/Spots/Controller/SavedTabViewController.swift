@@ -19,6 +19,12 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var genreLabel: UILabel!
     
+    @IBOutlet weak var spotImage: UIImageView!
+    
+    @IBOutlet weak var spotTitle: UILabel!
+    
+    @IBOutlet weak var spotSubtitle: UILabel!
+    
     let db = Firestore.firestore()
     let uid = Auth.auth().currentUser?.uid
     var genreKeys: [String] = []
@@ -26,6 +32,10 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
     //var list:Dictionary<String,[Spot]> = [ : ]
     var currentGenre = "all"
     var allArray: [Spot] = []
+    let storage = Storage.storage().reference()
+    //var imageList:Dictionary<String,String> = [ : ]
+    var imageList = [String: [String]]()
+    var allImage: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +44,7 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
         spotTable.dataSource = self
         spotTable.delegate = self
 
-        spotTable.register(UITableViewCell.self, forCellReuseIdentifier: "spotCell")
+        //spotTable.register(spotCell.self, forCellReuseIdentifier: "spotCell")
         
         spotTable.reloadData()
         
@@ -60,6 +70,7 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
                         let genre = document.get("genre_record")
                         self.genreKeys.append(genre as! String)
                         self.spotsList[genre as! String] = []
+                        self.imageList[genre as! String] = []
                         print(self.genreKeys)
                         
                     }
@@ -86,9 +97,23 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
                     self.spotsList[genre_record]?.append(addSpot)
                     print("completed add",title)
                     self.allArray.append(addSpot)
+                    
+                    let docid = document.documentID
+                    self.storage.child("\(self.uid!)/\(docid).png").downloadURL(completion: {url, error in
+                                guard let url = url, error == nil else {
+                                    self.allImage.append("")
+                                    print("guard")
+                                    return
+                                }
+                        print("in here")
+                                let urlString = url.absoluteString
+                        self.imageList[genre_record]?.append(urlString)
+                        self.allImage.append(urlString)
+                })
                 }
                 print(self.spotsList)
                 print(self.allArray)
+                
                 DispatchQueue.main.async {
                     self.spotTable.reloadData()
                 }
@@ -109,17 +134,40 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let spotCell = UITableViewCell(style: .subtitle, reuseIdentifier: "spotCell")
-        //let spotCell = UITableViewCell.dequeueReusableCell(withIdentifier: "spotCell") as! SpotsTableViewCell
+        //let spotCell = UITableViewCell(style: .subtitle, reuseIdentifier: "spotCell")
+        let spotCell = spotTable.dequeueReusableCell(withIdentifier: "spotCell") as! spotCell
         
         spotCell.backgroundColor = UIColor.green
         
        // spotCell.textLabel!.text = spotsList["null"]?[indexPath.row].label
         
-        spotCell.textLabel!.text = self.allArray[indexPath.row].label
+        spotCell.title?.text = self.allArray[indexPath.row].label
+        spotCell.subtitle?.text = self.allArray[indexPath.row].locationName
+        
+        //let urlString = self.allImage[indexPath.row]
+        //let urlFinal = URL(string: urlString)
+        //let task = URLSession.shared.dataTask(with: urlFinal!, completionHandler: { data, _, error in
+        //guard let data = data, error == nil else { return }
+                        
+        //    DispatchQueue.main.async {
+        //        let image = UIImage(data: data)
+        //        spotCell.pic?.image = image
+        //    }
+        //})
+        //task.resume()
+        
+        
         //spotCell.subtitle.text = self.allArray[indexPath.row].locationName
         return spotCell
     }
+    
+}
+
+class spotCell: UITableViewCell {
+    
+    @IBOutlet var pic: UIImageView?
+    @IBOutlet var subtitle: UILabel?
+    @IBOutlet var title: UILabel?
     
 }
     /*

@@ -136,6 +136,7 @@ class SavedSpotsViewController: UIViewController, UITableViewDataSource, UITable
         
         spotCell.spotSubtitle.text = spotsList[theKey!]![indexPath.row].locationName
         
+        
         storage.child("images/file.png").downloadURL(completion: {url, error in
             guard let url = url, error == nil else {
                 return

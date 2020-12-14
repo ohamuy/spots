@@ -61,6 +61,12 @@ class CustomGenreViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+//    profilePic.layer.cornerRadius = profilepic.frame.width / 2
+//    profilePic.layer.borderColor = UIColor.init(red: 234/255, green: 226/255, blue: 197/255, alpha: 1).cgColor
+//    profilePic.layer.borderWidth = 6
+//    profilePic.layer.masksToBounds = false
+//    profilePic.clipsToBounds = true
+
     
     
     /*

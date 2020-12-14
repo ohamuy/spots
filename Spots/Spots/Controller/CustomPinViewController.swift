@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseAuth
 import Firebase
 
-class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate {
+class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var pageTitle: UILabel!
     @IBOutlet weak var locationTitle: UILabel!
@@ -68,6 +68,14 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         Utilities.styleTextFieldAppContent(titleInputField)
         Utilities.styleTextFieldAppContent(subtitleTextField)
         Utilities.styleTableView(tableViewDropdown)
+        
+        self.titleInputField.delegate = self
+        self.subtitleTextField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     func tableViewSetup() {

@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseAuth
 import Firebase
 
-class NewPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate  {
+class NewPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, UITextFieldDelegate  {
     
     @IBOutlet weak var pageTitle: UILabel!
     @IBOutlet weak var locationTitle: UILabel!
@@ -43,6 +43,10 @@ class NewPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.titleInputField.delegate = self
+        self.genreInputField.delegate = self
+        self.subtitleTextField.delegate = self
+        
         setDefault()
         checkLocationServices()
         currentAnnotation = nil
@@ -67,9 +71,14 @@ class NewPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerCo
         }
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
     @IBAction func centerPressed(_ sender: Any) {
         locationMapView.userTrackingMode = .follow
-
     }
     
     //Add styling to all labels, buttons and fields
@@ -241,7 +250,6 @@ class NewPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerCo
             currentAnnotation = nil
         }
     }
-    
     
     //adds spot to firebase
     @IBAction func finishTapped(_ sender: Any) {

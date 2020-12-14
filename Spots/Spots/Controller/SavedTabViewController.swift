@@ -17,14 +17,6 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var spotTable: UITableView!
     
-    @IBOutlet weak var genreLabel: UILabel!
-    
-    @IBOutlet weak var spotImage: UIImageView!
-    
-    @IBOutlet weak var spotTitle: UILabel!
-    
-    @IBOutlet weak var spotSubtitle: UILabel!
-    
     @IBOutlet weak var tableViewDropdown: UITableView!
     @IBOutlet weak var selectGenre: UIButton!
     
@@ -144,15 +136,8 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
                     let color = self.colorsDict[genre_record]
                     let addSpot = Spot(label: title , locationName: subtitle, genre_record: genre_record, coordinate: location, docid: docid, genreColor: color!)
                     self.spotsList[genre_record]?.append(addSpot)
-                    //print("completed add",title)
                     self.allArray.append(addSpot)
-                    
-                    //                    print(self.allImage)
-                    //                    print(self.allArray)
                 }
-                //                print(self.spotsList)
-                //                print(self.allArray)
-                //
                 DispatchQueue.main.async {
                     self.spotTable.reloadData()
                 }
@@ -165,7 +150,6 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
             return genres.count
         }
         if selectedGenre == "null" {
-            print(allArray.count)
             return allArray.count
         }
         else{
@@ -193,7 +177,6 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
                 spotCell.subtitle?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
             }
             else{
-                print("in else of tableview")
                 spotCell.title?.text = self.spotsList[selectedGenre]?[indexPath.row].label
                 spotCell.title?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
                 spotCell.subtitle?.text = self.spotsList[selectedGenre]?[indexPath.row].locationName
@@ -224,10 +207,8 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
         if tableView == spotTable{
             let spotInfoVC = storyboard!.instantiateViewController(identifier: "spotInfo") as SpotInfoViewController
             if selectedGenre == "null" {
-                print(allArray)
                 spotInfoVC.clickedSpot = self.allArray[indexPath.row]
             } else {
-                print("selected is ",selectedGenre)
                 spotInfoVC.clickedSpot = spotsList[selectedGenre]![indexPath.row]
             }
             navigationController?.pushViewController(spotInfoVC, animated: true)

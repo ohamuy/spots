@@ -483,9 +483,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" text="My Spots" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUh-q3-e2T">
-                                <rect key="frame" x="13" y="44" width="343" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="My Spots" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUh-q3-e2T">
+                                <rect key="frame" x="13" y="44" width="343" height="31.333333333333329"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -497,9 +496,12 @@
                             <constraint firstItem="FRQ-eB-8cc" firstAttribute="top" secondItem="YOG-uB-2FO" secondAttribute="top" constant="35" id="48Y-Fz-WQu"/>
                             <constraint firstItem="YOG-uB-2FO" firstAttribute="trailing" secondItem="FRQ-eB-8cc" secondAttribute="trailing" id="AMs-bB-gus"/>
                             <constraint firstItem="AZ8-lu-aRd" firstAttribute="centerX" secondItem="YOG-uB-2FO" secondAttribute="centerX" id="B66-xH-H4g"/>
+                            <constraint firstItem="GUh-q3-e2T" firstAttribute="leading" secondItem="YOG-uB-2FO" secondAttribute="leading" constant="13" id="EDF-Ob-7ey"/>
+                            <constraint firstItem="YOG-uB-2FO" firstAttribute="trailing" secondItem="GUh-q3-e2T" secondAttribute="trailing" constant="19" id="IfB-t1-T9l"/>
                             <constraint firstItem="YOG-uB-2FO" firstAttribute="trailing" secondItem="FRQ-eB-8cc" secondAttribute="trailing" id="WZq-Aa-imW"/>
                             <constraint firstItem="FRQ-eB-8cc" firstAttribute="leading" secondItem="YOG-uB-2FO" secondAttribute="leading" id="cOA-kN-Ji7"/>
                             <constraint firstItem="AZ8-lu-aRd" firstAttribute="bottom" secondItem="YOG-uB-2FO" secondAttribute="bottom" id="lvD-zG-zK4"/>
+                            <constraint firstItem="GUh-q3-e2T" firstAttribute="top" secondItem="YOG-uB-2FO" secondAttribute="top" id="zSY-uP-hVh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YOG-uB-2FO"/>
                     </view>
@@ -913,7 +915,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RGr-IP-683">
-                                <rect key="frame" x="18" y="314" width="339.33333333333331" height="339.33333333333326"/>
+                                <rect key="frame" x="38" y="356.66666666666669" width="299" height="299.00000000000006"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RGr-IP-683" secondAttribute="height" multiplier="1:1" id="KxJ-39-d92"/>
                                 </constraints>
@@ -930,8 +932,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BKQ-Ik-8DE">
+                                <rect key="frame" x="38" y="127.33333333333333" width="299" height="198.33333333333337"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyR-Tb-gsm" customClass="ColorButton" customModule="Spots" customModuleProvider="target">
+                                <rect key="frame" x="309" y="47.333333333333343" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gyR-Tb-gsm" secondAttribute="height" multiplier="1:1" id="fVz-6M-GBv"/>
+                                </constraints>
+                                <state key="normal" title="XX"/>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pal-pW-Lj6">
-                                <rect key="frame" x="43.333333333333343" y="675.66666666666663" width="288.33333333333326" height="42"/>
+                                <rect key="frame" x="38" y="675.66666666666663" width="299" height="42"/>
                                 <color key="backgroundColor" red="0.1450980392" green="0.5450980392" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -943,39 +955,31 @@
                                     <action selector="saveGenreButtonTapped:" destination="d0U-hz-kAF" eventType="touchUpInside" id="OoZ-ai-t7T"/>
                                 </connections>
                             </button>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BKQ-Ik-8DE">
-                                <rect key="frame" x="18" y="110.66666666666667" width="339" height="185.33333333333331"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyR-Tb-gsm" customClass="ColorButton" customModule="Spots" customModuleProvider="target">
-                                <rect key="frame" x="309" y="49" width="48" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="gyR-Tb-gsm" secondAttribute="height" multiplier="1:1" id="fVz-6M-GBv"/>
-                                </constraints>
-                                <state key="normal" title="XX"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="AEi-0j-16j" firstAttribute="width" secondItem="j5c-EN-H2v" secondAttribute="width" multiplier="0.904" constant="-66" id="1uX-4V-bls"/>
                             <constraint firstItem="pal-pW-Lj6" firstAttribute="centerX" secondItem="1Wf-Io-Njp" secondAttribute="centerX" id="2hI-yy-03W"/>
                             <constraint firstItem="RGr-IP-683" firstAttribute="centerX" secondItem="1Wf-Io-Njp" secondAttribute="centerX" id="9aK-HA-2x0"/>
-                            <constraint firstItem="BKQ-Ik-8DE" firstAttribute="top" secondItem="gyR-Tb-gsm" secondAttribute="bottom" constant="13.666666666666671" id="LP5-l5-zw6"/>
+                            <constraint firstItem="1Wf-Io-Njp" firstAttribute="trailing" secondItem="RGr-IP-683" secondAttribute="trailing" constant="38" id="Akh-nn-DSM"/>
+                            <constraint firstItem="BKQ-Ik-8DE" firstAttribute="top" secondItem="gyR-Tb-gsm" secondAttribute="bottom" constant="32" id="LP5-l5-zw6"/>
                             <constraint firstItem="AEi-0j-16j" firstAttribute="centerX" secondItem="1Wf-Io-Njp" secondAttribute="centerX" constant="-33" id="LRw-v0-79Z"/>
+                            <constraint firstItem="BKQ-Ik-8DE" firstAttribute="leading" secondItem="1Wf-Io-Njp" secondAttribute="leading" constant="38" id="W0G-Ui-GlB"/>
                             <constraint firstItem="AEi-0j-16j" firstAttribute="top" secondItem="1Wf-Io-Njp" secondAttribute="top" constant="4" id="Y1U-fh-dEl"/>
+                            <constraint firstItem="RGr-IP-683" firstAttribute="leading" secondItem="1Wf-Io-Njp" secondAttribute="leading" constant="38" id="aAr-FQ-DfR"/>
                             <constraint firstItem="eTI-bu-exu" firstAttribute="top" secondItem="AEi-0j-16j" secondAttribute="bottom" constant="-2.6666666666666572" id="cWb-xt-y1e"/>
                             <constraint firstItem="1Wf-Io-Njp" firstAttribute="trailing" secondItem="gyR-Tb-gsm" secondAttribute="trailing" constant="18" id="eyk-V1-8pf"/>
                             <constraint firstItem="gyR-Tb-gsm" firstAttribute="leading" secondItem="AEi-0j-16j" secondAttribute="trailing" constant="18" id="fsi-to-ZhW"/>
-                            <constraint firstItem="RGr-IP-683" firstAttribute="top" secondItem="BKQ-Ik-8DE" secondAttribute="bottom" constant="18" id="gDZ-Lg-dm3"/>
+                            <constraint firstItem="RGr-IP-683" firstAttribute="top" secondItem="BKQ-Ik-8DE" secondAttribute="bottom" constant="31" id="gDZ-Lg-dm3"/>
+                            <constraint firstItem="1Wf-Io-Njp" firstAttribute="trailing" secondItem="BKQ-Ik-8DE" secondAttribute="trailing" constant="38" id="gv8-m9-FFy"/>
+                            <constraint firstItem="pal-pW-Lj6" firstAttribute="top" secondItem="RGr-IP-683" secondAttribute="bottom" constant="20" id="hf9-Ds-J8q"/>
                             <constraint firstItem="1Wf-Io-Njp" firstAttribute="bottom" secondItem="pal-pW-Lj6" secondAttribute="bottom" constant="60.333333333333371" id="hl0-RH-wGo"/>
                             <constraint firstItem="gyR-Tb-gsm" firstAttribute="width" secondItem="j5c-EN-H2v" secondAttribute="width" multiplier="0.128" id="jXW-mT-uq3"/>
                             <constraint firstItem="eTI-bu-exu" firstAttribute="centerX" secondItem="1Wf-Io-Njp" secondAttribute="centerX" constant="-33" id="kQO-GX-qf6"/>
                             <constraint firstItem="eTI-bu-exu" firstAttribute="width" secondItem="j5c-EN-H2v" secondAttribute="width" multiplier="0.904889" constant="-66.333333333333314" id="lPn-Zz-bAl"/>
-                            <constraint firstItem="RGr-IP-683" firstAttribute="width" secondItem="j5c-EN-H2v" secondAttribute="width" multiplier="0.904889" id="mSU-c5-fsF"/>
-                            <constraint firstItem="pal-pW-Lj6" firstAttribute="top" secondItem="RGr-IP-683" secondAttribute="bottom" constant="22.333333333333371" id="nDM-Gq-HjJ"/>
-                            <constraint firstItem="BKQ-Ik-8DE" firstAttribute="top" secondItem="eTI-bu-exu" secondAttribute="bottom" constant="3.3333333333333286" id="pGN-X9-E9V"/>
                             <constraint firstItem="BKQ-Ik-8DE" firstAttribute="centerX" secondItem="1Wf-Io-Njp" secondAttribute="centerX" id="pWY-DZ-WAr"/>
-                            <constraint firstItem="BKQ-Ik-8DE" firstAttribute="width" secondItem="j5c-EN-H2v" secondAttribute="width" multiplier="0.904" id="vW5-Pu-oiP"/>
-                            <constraint firstItem="pal-pW-Lj6" firstAttribute="width" secondItem="j5c-EN-H2v" secondAttribute="width" multiplier="0.768889" id="xqn-fa-nlH"/>
+                            <constraint firstItem="1Wf-Io-Njp" firstAttribute="trailing" secondItem="pal-pW-Lj6" secondAttribute="trailing" constant="38" id="rNy-Fw-pJs"/>
+                            <constraint firstItem="BKQ-Ik-8DE" firstAttribute="top" secondItem="eTI-bu-exu" secondAttribute="bottom" constant="20" id="vGo-iT-ZeA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Wf-Io-Njp"/>
                     </view>

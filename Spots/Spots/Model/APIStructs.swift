@@ -11,7 +11,7 @@ import Foundation
  struct APIResults: Decodable {
     let results: [Results]
     let html_attributions: [String]
-    let next_page_token: String
+    let next_page_token: String?
  }
  
  struct Results: Decodable {

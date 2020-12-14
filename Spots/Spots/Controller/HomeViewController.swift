@@ -41,6 +41,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
            }
     }
     
+    
     let db = Firestore.firestore()
     var theData: APIResults?
     var searchInput: String = ""
@@ -261,6 +262,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
     }
     
     func searchBarCancelButtonClicked(_ search: UISearchBar) {
+        updateMap()
         if myTableView != nil{
             search.text = ""
             search.showsCancelButton = false

@@ -318,8 +318,6 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
                     } else {
                         for document in querySnapshot!.documents {
                             docid = document.documentID
-                            print("docid: \(docid)")
-                            print("\(uid!)/\(docid).png")
                             self.storage.child("\(uid!)/\(docid).png").putData(self.imageData!, metadata: nil, completion: { _, error in
                                 guard error == nil else {
                                     print("Failed to Upload")
@@ -332,16 +330,6 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         }
         
         clearPin(mode: CONFIRM)
-        
-        //TESTING CODE FOR GENRES
-        //add spot to firestore database
-        //        var genreRecord = genreInputField.text ?? "null_genre";
-        //        genreRecord = Utilities.parseInputToRecord(input:  genreRecord);
-        
-        // *** var genreRecord ready for storage in DB
-        //        print("Pin title: \(title)")
-        //        print("Record version: \(genreRecord)");
-        //        print("Dislay version: \(Utilities.parseRecordToDisplayText(record: genreRecord))")
     }
 }
 

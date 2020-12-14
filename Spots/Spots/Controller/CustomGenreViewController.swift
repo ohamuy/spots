@@ -157,7 +157,8 @@ class CustomGenreViewController: UIViewController {
             return
         }
       
-        
+        let title = Utilities.parseInputToRecord(input: titleInput.text!)
+        let desc = descriptionInput.text ?? ""
         // TODO: Firestore stuff
     }
     

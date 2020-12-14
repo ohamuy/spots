@@ -11,7 +11,7 @@ import FirebaseStorage
 import FirebaseAuth
 import Firebase
 
-class CustomGenreViewController: UIViewController {
+class CustomGenreViewController: UIViewController, UITextFieldDelegate {
     
     // Model variables
     var genreColor: UIColor?
@@ -34,7 +34,9 @@ class CustomGenreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        self.titleInput.delegate = self
+        self.descriptionInput.delegate = self
+        
         setDefault()
     }
     
@@ -49,6 +51,11 @@ class CustomGenreViewController: UIViewController {
         Utilities.styleButton(cancelButton)
         noColorButton.layer.borderWidth = 3
         noColorButton.layer.borderColor = UIColor.clear.cgColor
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     // Event handlers

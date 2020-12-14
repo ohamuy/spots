@@ -23,6 +23,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationMapView.delegate = self
         search.delegate = self
         search.showsCancelButton = true
         checkLocationServices()
@@ -43,7 +44,6 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
     let db = Firestore.firestore()
     var theData: APIResults?
     var searchInput: String = ""
-    var newSearchInput: String = ""
     let APIKey = "AIzaSyDrjVeQhWVpIJhYrrVX9vyykLhq475jjkY"
     var myTableView: UITableView!
     let manager = CLLocationManager()
@@ -74,13 +74,13 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
                         print(self.userPins)
                         print(self.userPins.count)
                         for index in 0 ..< self.userPins.count  {
-                            //print("\(index) : \(self.userPins[index]["title"] ?? <#default value#>)")
                             
                             let annotation = MKPointAnnotation()
                             let centerCoordinate = CLLocationCoordinate2D(latitude: self.userPins[index]["latitude"] as! CLLocationDegrees, longitude: self.userPins[index]["longitude"] as! CLLocationDegrees)
                             annotation.coordinate = centerCoordinate
                             annotation.title = "\(self.userPins[index]["title"] ?? "")"
                             self.locationMapView.addAnnotation(annotation)
+                           
                         }
                     }
             }
@@ -154,9 +154,9 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
     
     func fetchDataFromSearch(){
         if searchInput != ""{
-            let url = URL(string: "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(newSearchInput)&location=\(locationMapView.annotations[0].coordinate.latitude),\(locationMapView.annotations[0].coordinate.longitude)&radius=\(regionMeter)&fields=formatted_address,name,geometry&key=\(APIKey)")
+            guard let url = URL(string: "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(searchInput)&location=\(locationMapView.annotations[0].coordinate.latitude),\(locationMapView.annotations[0].coordinate.longitude)&radius=\(regionMeter)&fields=formatted_address,name,geometry&key=\(APIKey)") else {return}
             do{
-                let data = try Data(contentsOf: url!)
+                let data = try Data(contentsOf: url)
                 theData = try JSONDecoder().decode(APIResults.self, from:data)
                 print(theData ?? "nothing")
             }
@@ -168,42 +168,66 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
     }
     
     func searchBarSearchButtonClicked(_ search: UISearchBar) {
+        if myTableView != nil{
+            myTableView.removeFromSuperview()
+        }
+        let child = SpinnerViewController()
+
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+        
         search.showsCancelButton = true
         if search.text != nil{
             searchInput = search.text!
-            newSearchInput = searchInput.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+            searchInput = searchInput.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+            searchInput = searchInput.replacingOccurrences(of: "'", with: "%27", options: .literal, range: nil)
+            searchInput = searchInput.replacingOccurrences(of: "!", with: "%21", options: .literal, range: nil)
+            searchInput = searchInput.replacingOccurrences(of: "?", with: "%3f", options: .literal, range: nil)
+            searchInput = searchInput.replacingOccurrences(of: "&", with: "%3f", options: .literal, range: nil)
+            searchInput = searchInput.replacingOccurrences(of: ",", with: "%2c", options: .literal, range: nil)
         }
-        fetchDataFromSearch()
-        
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.fetchDataFromSearch()
+             DispatchQueue.main.async {
+                self.displayTable()
+                child.removeFromParent()
+                child.willMove(toParent: nil)
+                child.view.removeFromSuperview()
+            }
+        }
+    }
+    
+    func displayTable() {
         let displayX: CGFloat = locationMapView.frame.minX
-        let displayY: CGFloat = locationMapView.frame.minY
-        let displayWidth: CGFloat = locationMapView.frame.size.width
-        let displayHeight: CGFloat = locationMapView.frame.size.height
-        
-        if theData != nil{
-            if theData!.results.count > 0 {
-                myTableView = UITableView(frame: CGRect(x: displayX, y: displayY, width: displayWidth, height: displayHeight))
-                myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
-                myTableView.dataSource = self
-                myTableView.delegate = self
-                self.view.addSubview(myTableView)
-            } else{
+            let displayY: CGFloat = locationMapView.frame.minY
+            let displayWidth: CGFloat = locationMapView.frame.size.width
+            let displayHeight: CGFloat = locationMapView.frame.size.height
+            
+            if theData != nil{
+                if theData!.results.count > 0 {
+                    myTableView = UITableView(frame: CGRect(x: displayX, y: displayY, width: displayWidth, height: displayHeight))
+                    myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+                    myTableView.dataSource = self
+                    myTableView.delegate = self
+                    self.view.addSubview(myTableView)
+                } else{
+                    let alert = UIAlertController(title: "Alert", message: "No Results.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            } else {
                 let alert = UIAlertController(title: "Alert", message: "No Results.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
                 NSLog("The \"OK\" alert occured.")
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
-        } else {
-            let alert = UIAlertController(title: "Alert", message: "No Results.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }
-    
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if theData != nil {
@@ -243,6 +267,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, MKMapViewDelega
             myTableView.removeFromSuperview()
         }
     }
+    
     
 }
 

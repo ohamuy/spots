@@ -40,7 +40,7 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
     var switchColor = false
     var backgroundColor: UIColor = UIColor.systemGray2
     var genres: [String] = []
-    var selectedGenre = ""
+    var selectedGenre = "null"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,12 +139,12 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
         if tableView == tableViewDropdown {
             return genres.count
         }
-        if currentGenre == "all" {
+        if selectedGenre == "null" {
             print(allArray.count)
             return allArray.count
         }
         else{
-            return spotsList[currentGenre]!.count
+            return spotsList[selectedGenre]?.count ?? 0
         }
         
     }
@@ -164,11 +164,18 @@ class SavedTabViewController: UIViewController, UITableViewDataSource, UITableVi
             spotCell.backgroundColor = UIColor.systemGray5
         }
         
-        spotCell.title?.text = self.allArray[indexPath.row].label
-        spotCell.title?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
-        spotCell.subtitle?.text = self.allArray[indexPath.row].locationName
-        spotCell.subtitle?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
-        
+        if selectedGenre == "null" {
+            spotCell.title?.text = self.allArray[indexPath.row].label
+            spotCell.title?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+            spotCell.subtitle?.text = self.allArray[indexPath.row].locationName
+            spotCell.subtitle?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+        }
+        else{
+            spotCell.title?.text = self.spotsList[selectedGenre]?[indexPath.row].label
+            spotCell.title?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+            spotCell.subtitle?.text = self.spotsList[selectedGenre]?[indexPath.row].locationName
+            spotCell.subtitle?.textColor = UIColor.init(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+        }
         return spotCell
     }
   

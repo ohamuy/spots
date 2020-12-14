@@ -1,8 +1,8 @@
 //
-//  CustomPinViewController.swift
+//  NewPinViewController.swift
 //  Spots
 //
-//  Created by Oliver Hamuy on 12/9/20.
+//  Created by Kathryn Krumholz on 12/12/20.
 //  Copyright © 2020 SpotsDevelopers. All rights reserved.
 //
 
@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseAuth
 import Firebase
 
-class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
+class NewPinViewController: UIViewController, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate  {
     
     @IBOutlet weak var pageTitle: UILabel!
     @IBOutlet weak var locationTitle: UILabel!
@@ -30,6 +30,7 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     
     @IBOutlet weak var locationMapView: MKMapView!
     
+    var newPin: Results?
     var coordinateData: CLLocationCoordinate2D?
     var currentAnnotation: MKPointAnnotation?
     
@@ -43,10 +44,27 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         super.viewDidLoad()
         
         setDefault()
-        setLongPress()
         checkLocationServices()
-        coordinateData = nil
         currentAnnotation = nil
+        coordinateData = nil
+        
+        if newPin != nil{
+            titleInputField.text = newPin!.name
+            titlePreview.text = newPin!.name
+            if newPin!.geometry != nil{
+                if newPin?.geometry?.location != nil{
+                    coordinateData = CLLocationCoordinate2D(latitude: newPin!.geometry!.location!.lat, longitude: newPin!.geometry!.location!.lng)
+                    let annotation = MKPointAnnotation()
+                    let centerCoordinate = CLLocationCoordinate2D(latitude: newPin!.geometry!.location!.lat, longitude: newPin!.geometry!.location!.lng)
+                    annotation.coordinate = centerCoordinate
+                    annotation.title = "\(newPin!.formatted_address ?? "")"
+                    locationMapView.addAnnotation(annotation)
+                    if coordinateData != nil{
+                        locationMapView.setCenter(coordinateData!, animated: true)
+                    }
+                }
+            }
+        }
     }
     
     //Add styling to all labels, buttons and fields
@@ -61,32 +79,6 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         Utilities.styleTextFieldAppContent(subtitleTextField)
     }
     
-    //Allow for long press to add pin to map view
-    func setLongPress() {
-        locationMapView.delegate = self
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.addPin(_:)))
-        longPressRecognizer.minimumPressDuration = 0.5
-        locationMapView.addGestureRecognizer(longPressRecognizer)
-        
-        locationMapView.mapType = MKMapType.standard
-    }
-    
-    //Adds a pin when a long press is recongized
-    //learned here: https://www.youtube.com/watch?v=Kfw9XCO6VGY
-    @objc func addPin(_ longPress: UILongPressGestureRecognizer) {
-        locationMapView.removeAnnotations(locationMapView.annotations)
-        
-        let location = longPress.location(in: locationMapView)
-        coordinateData = locationMapView.convert(location, toCoordinateFrom: locationMapView)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinateData!
-        annotation.title = "latitude: " + String(format: "%0.02f", annotation.coordinate.latitude) + "longitude: " + String(format: "%0.02f", annotation.coordinate.latitude)
-        
-        locationMapView.addAnnotation(annotation)
-        
-        currentAnnotation = annotation
-    }
     
     //Set up location manager
     func setUpLocationManager() {
@@ -170,13 +162,13 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
     
     @IBAction func resetDataButtonTapped(_ sender: Any) {
         let confirm = UIAlertController(title: "Confirm Reset", message: "Are you sure you want to clear the pin in-progress?", preferredStyle: .alert)
-        confirm.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Confirm"), style: .default, handler: { _ in
-            NSLog("Pin clear aborted")
-            return
-        }))
         confirm.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Confirm"), style: .default, handler: { _ in
             NSLog("Pin clear confirmed, reset VC")
             self.clearPin(mode: RESET)
+        }))
+        confirm.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Confirm"), style: .default, handler: { _ in
+            NSLog("Pin clear aborted")
+            return
         }))
         self.present(confirm, animated: true, completion: nil)
     }
@@ -291,7 +283,6 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         let annOneLat = Double(round(10000*annotation[1].coordinate.latitude)/10000)
         let annOneLong = Double(round(10000*annotation[1].coordinate.longitude)/10000)
         
-        
         var index = 0
         
         if annZeroLat == userLat && annZeroLong == userLong {
@@ -307,6 +298,7 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
             "longitude" : annotation[index].coordinate.longitude,
             "latitude" : annotation[index].coordinate.latitude
         ])
+        
         
         
         
@@ -333,36 +325,5 @@ class CustomPinViewController: UIViewController, MKMapViewDelegate, UIImagePicke
         
         clearPin(mode: CONFIRM)
         
-        //TESTING CODE FOR GENRES
-        //add spot to firestore database
-        //        var genreRecord = genreInputField.text ?? "null_genre";
-        //        genreRecord = Utilities.parseInputToRecord(input:  genreRecord);
-        
-        // *** var genreRecord ready for storage in DB
-        //        print("Pin title: \(title)")
-        //        print("Record version: \(genreRecord)");
-        //        print("Dislay version: \(Utilities.parseRecordToDisplayText(record: genreRecord))")
     }
 }
-
-//CODE TO REQUEST IMAGES FROM THE DATABASE
-//        storage.child("images/file.png").downloadURL(completion: {url, error in
-//            guard let url = url, error == nil else {
-//                return
-//            }
-//
-//            let urlString = url.absoluteString
-//            print("url \(urlString)")
-//            let urlFinal = URL(string: urlString)
-//            let task = URLSession.shared.dataTask(with: urlFinal!, completionHandler: { data, _, error in
-//                guard let data = data, error == nil else {
-//                    return
-//                }
-//
-//                DispatchQueue.main.async {
-//                    let image = UIImage(data: data)
-//                    self.imagePreview.image = image
-//                }
-//            })
-//            task.resume()
-//        })
